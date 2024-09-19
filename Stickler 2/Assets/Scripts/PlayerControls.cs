@@ -13,10 +13,12 @@ public class PlayerControls : MonoBehaviour
     [SerializeField, Range(0, 90)] private float maxViewAngle;
     [SerializeField] private Transform lookAtPoint;
     [SerializeField] private float bulletForce;
+    [SerializeField] float shotCooldown;
 
     Rigidbody rb;
     Vector3 movementVector;
     private Vector2 currentRotation;
+    private bool canShoot = true;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,8 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.transform.position += new Vector3(movementVector.x, 0, movementVector.z) * speed * Time.deltaTime;
+        //rb.transform.position += new Vector3(movementVector.x, 0, movementVector.z) * speed * Time.deltaTime;
+        transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
     }
 
     void OnMove(InputValue movementValue)
@@ -38,9 +41,24 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
+        if(canShoot)
+        {
+            Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
+            Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
+            canShoot = false;
+            StartCoroutine(ShootDelay());
+        }
 
     }
 
+    private IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(shotCooldown);
+        canShoot = true;
+
+        yield return null;
+    }
     void OnLook(InputValue lookValue)
     {
         //controls rotation angles

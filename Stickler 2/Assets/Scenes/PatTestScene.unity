@@ -390,13 +390,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  bulletPrefab: {fileID: 0}
-  mouseSensX: 20
-  mouseSensY: 20
+  bulletPrefab: {fileID: -4883250352751433200, guid: 84c1c5856899c28499172860fd40fd3a,
+    type: 3}
+  mouseSensX: 5
+  mouseSensY: 5
   minViewAngle: -90
   maxViewAngle: 90
   lookAtPoint: {fileID: 1176945321}
-  bulletForce: 0
+  bulletForce: 50
+  shotCooldown: 1
 --- !u!114 &756786025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,7 +527,7 @@ Transform:
   m_GameObject: {fileID: 1176945320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -596,7 +598,7 @@ Transform:
   m_GameObject: {fileID: 1379538610}
   serializedVersion: 2
   m_LocalRotation: {x: 0.042274944, y: -0.9205316, z: 0.10399892, w: 0.3741909}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -691,7 +693,7 @@ Transform:
   m_GameObject: {fileID: 1468460178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.9000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
