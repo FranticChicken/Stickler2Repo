@@ -19,7 +19,7 @@ public class GameOverUI : MonoBehaviour
         gameOverScreen = GameObject.Find("Game Over Screen");
         restartButton.onClick.AddListener(OnRestartButtonClick);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
-        playerDead = true;
+        //playerDead = true;
         gameOverScreen.gameObject.SetActive(false);
     }
 
@@ -32,6 +32,12 @@ public class GameOverUI : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void GameOver()
+    {
+        playerDead = true; 
+    }
+
 
     // Update is called once per frame
     void Update()
