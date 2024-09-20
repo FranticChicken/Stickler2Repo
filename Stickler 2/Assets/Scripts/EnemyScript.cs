@@ -7,13 +7,15 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject target;
     public int speed;
- 
-    public GameOverUI gameOverUIScript;
+
+    private GameObject canvas;
+    private GameOverUI gameOverUIScript;
 
     // Start is called before the first frame update
     void Start()
     {
-         
+        canvas = GameObject.FindGameObjectWithTag("Canvas");
+        gameOverUIScript = canvas.GetComponent<GameOverUI>();
     }
 
     private void OnCollisionEnter(Collision collision)

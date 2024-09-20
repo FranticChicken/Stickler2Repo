@@ -121,8 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 7901868809804884629, guid: 55b2e885f17164d4bb2e06775f776bbd, type: 3}
   speed: 5
-  gameOverUIScript: {fileID: 5034013834252671840, guid: 399073370074a5346a3a16a8e8a18bf8,
-    type: 3}
 --- !u!54 &7133073837630385831
 Rigidbody:
   m_ObjectHideFlags: 0
