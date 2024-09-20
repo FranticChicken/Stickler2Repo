@@ -20,6 +20,8 @@ public class PlayerControls : MonoBehaviour
     private Vector2 currentRotation;
     private bool canShoot = true;
 
+    [SerializeField] private Animator gun = new Animator();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +49,7 @@ public class PlayerControls : MonoBehaviour
             currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
             Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
             canShoot = false;
+            gun.SetBool("Shoot", true);
             StartCoroutine(ShootDelay());
         }
 
@@ -55,6 +58,7 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shotCooldown);
+        gun.SetBool("Shoot", false);
         canShoot = true;
 
         yield return null;
