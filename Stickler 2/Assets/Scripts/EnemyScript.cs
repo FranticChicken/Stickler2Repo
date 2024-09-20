@@ -16,13 +16,17 @@ public class EnemyScript : MonoBehaviour
          
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
             gameOverUIScript.GameOver();
+            Debug.Log("collided with player");
         }
+
     }
+
+
 
     // Update is called once per frame
     void Update()
