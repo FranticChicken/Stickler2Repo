@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     private float spawnTimer;
 
     // Number of enemies to spawn each time
-    public int enemiesPerSpawn = 2;
+    public int enemiesPerSpawn = 1;
 
     void Start()
     {
