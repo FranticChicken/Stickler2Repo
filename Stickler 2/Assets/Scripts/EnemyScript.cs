@@ -7,15 +7,25 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject target;
     public int speed;
+    [SerializeField] private LayerMask wallLayer;
+    [SerializeField] private LayerMask groundLayer;
 
     private GameObject canvas;
     private GameOverUI gameOverUIScript;
+    private Rigidbody rb;
 
+    private bool hit1; 
+    private bool hit2;
+    private bool hit3;
+    private bool hit4;
+    bool hitGround;
     // Start is called before the first frame update
     void Start()
     {
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         gameOverUIScript = canvas.GetComponent<GameOverUI>();
+        rb = GetComponent<Rigidbody>();
+       
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -28,11 +38,43 @@ public class EnemyScript : MonoBehaviour
 
     }
 
+    private bool IsOnWall()
+    {
+        //uses 4 raycasts for each direction in x & z axes to see if it is against the wall
+        hit1 = Physics.Raycast(transform.position, Vector3.forward, 1.0f, wallLayer);
+        hit2 = Physics.Raycast(transform.position, -Vector3.forward, 1.0f, wallLayer);
+        hit3 = Physics.Raycast(transform.position, Vector3.left, 1.0f, wallLayer);
+        hit4 = Physics.Raycast(transform.position, Vector3.right, 1.0f, wallLayer);
 
+        hitGround = Physics.Raycast(transform.position, Vector3.down, 1.0f, groundLayer);
+
+        if (hit1 || hit2 || hit3 || hit4 )
+        {
+            if (!hitGround)
+            {
+                rb.useGravity = false;  
+                return true;
+            }
+            else {
+                rb.useGravity = true;
+                return false;
+            }
+            
+        } 
+        else
+        {
+            rb.useGravity = true;
+            return false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+       
+        
+        
     }
 }
