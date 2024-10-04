@@ -18,7 +18,7 @@ public class EnemyScript : MonoBehaviour
     private bool hit2;
     private bool hit3;
     private bool hit4;
-    bool hitGround;
+    private bool hitGround;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,18 +52,18 @@ public class EnemyScript : MonoBehaviour
         {
             if (!hitGround)
             {
-                rb.useGravity = false;  
+                //rb.useGravity = false;  
                 return true;
             }
             else {
-                rb.useGravity = true;
+                //rb.useGravity = true;
                 return false;
             }
             
         } 
         else
         {
-            rb.useGravity = true;
+            //rb.useGravity = true;
             return false;
         }
     }
@@ -71,8 +71,15 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!IsOnWall())
+        {
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        } 
+        else
+        {
+            transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
+        }
+           
        
         
         
