@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
+    
+
+
+    private void Start()
+    {
+        
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -12,9 +19,11 @@ public class Bullets : MonoBehaviour
         }
         else if (other.CompareTag("Enemy"))
         {
-            Debug.Log("Spider Hit");
+            //Debug.Log("Spider Hit");
+            
             Destroy(gameObject);
             Destroy(other.gameObject);
+
         } else
         {
             Destroy(gameObject);

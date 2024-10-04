@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
 
-    public GameObject target;
+    private GameObject target;
     public int speed;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask groundLayer;
@@ -25,7 +25,7 @@ public class EnemyScript : MonoBehaviour
         canvas = GameObject.FindGameObjectWithTag("Canvas");
         gameOverUIScript = canvas.GetComponent<GameOverUI>();
         rb = GetComponent<Rigidbody>();
-       
+        target = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -46,7 +46,7 @@ public class EnemyScript : MonoBehaviour
         hit3 = Physics.Raycast(transform.position, Vector3.left, 1.0f, wallLayer);
         hit4 = Physics.Raycast(transform.position, Vector3.right, 1.0f, wallLayer);
 
-        hitGround = Physics.Raycast(transform.position, Vector3.down, 1.0f, groundLayer);
+        hitGround = Physics.Raycast(transform.position, Vector3.down, 0.1f, groundLayer);
 
         if (hit1 || hit2 || hit3 || hit4 )
         {

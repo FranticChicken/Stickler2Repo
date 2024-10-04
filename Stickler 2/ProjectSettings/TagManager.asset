@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Canvas
+  - Crosshair
+  - Gun
   layers:
   - Default
   - TransparentFX

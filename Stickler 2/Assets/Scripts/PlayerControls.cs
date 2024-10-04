@@ -20,13 +20,17 @@ public class PlayerControls : MonoBehaviour
     private Vector2 currentRotation;
     private bool canShoot = true;
 
+    private GameObject gunObject;
+    private AudioSource gunSounds;
+
     [SerializeField] private Animator gun = new Animator();
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        gunObject = GameObject.FindGameObjectWithTag("Gun");
+        gunSounds = gunObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,8 +49,11 @@ public class PlayerControls : MonoBehaviour
     {
         if(canShoot)
         {
-            Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+            Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position + new Vector3 (0,0.25f,0), Quaternion.identity);
             currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
+
+            gunSounds.Play();
+
             Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
             canShoot = false;
             gun.SetBool("Shoot", true);
@@ -78,6 +85,7 @@ public class PlayerControls : MonoBehaviour
         //rotate up and down
         lookAtPoint.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.right);
     }
+
 
     
 }

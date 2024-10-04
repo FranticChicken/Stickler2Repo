@@ -11,6 +11,8 @@ public class GameOverUI : MonoBehaviour
     public bool playerDead = false;
     public GameObject gameOverScreen;
 
+    private GameObject crosshair; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,14 @@ public class GameOverUI : MonoBehaviour
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
         
         gameOverScreen.gameObject.SetActive(false);
+        crosshair = GameObject.FindGameObjectWithTag("Crosshair");
     }
 
     void OnRestartButtonClick()
     {
+        Cursor.visible = false;
+        crosshair.gameObject.SetActive(true);
+        
         SceneManager.LoadScene("Waves");
     }
 
@@ -46,7 +52,9 @@ public class GameOverUI : MonoBehaviour
         Debug.Log(playerDead);
         if(playerDead == true)
         {
+            Cursor.visible = true;
             gameOverScreen.gameObject.SetActive(true);
+            crosshair.gameObject.SetActive(false);
             Debug.Log("show game over screen");
         }
     }

@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     void OnPlayButtonClick()
     {
+        Cursor.visible = false;
         SceneManager.LoadScene("Waves");
     }
 
