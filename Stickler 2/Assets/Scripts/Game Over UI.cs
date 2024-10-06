@@ -28,6 +28,8 @@ public class GameOverUI : MonoBehaviour
 
     void OnRestartButtonClick()
     {
+        
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         crosshair.gameObject.SetActive(true);
         
@@ -42,20 +44,23 @@ public class GameOverUI : MonoBehaviour
     public void GameOver()
     {
         playerDead = true;
-        Debug.Log("player is dead");
+
+        if (playerDead == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            gameOverScreen.gameObject.SetActive(true);
+            crosshair.gameObject.SetActive(false);
+            
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerDead);
-        if(playerDead == true)
-        {
-            Cursor.visible = true;
-            gameOverScreen.gameObject.SetActive(true);
-            crosshair.gameObject.SetActive(false);
-            Debug.Log("show game over screen");
-        }
+        
+       
     }
 }

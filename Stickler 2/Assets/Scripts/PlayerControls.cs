@@ -14,11 +14,15 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private Transform lookAtPoint;
     [SerializeField] private float bulletForce;
     [SerializeField] float shotCooldown;
+    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] private float shotDistance = 1;
+    [SerializeField] private Camera playerCamera;
 
     Rigidbody rb;
     Vector3 movementVector;
     private Vector2 currentRotation;
     private bool canShoot = true;
+    
 
     private GameObject gunObject;
     private AudioSource gunSounds;
@@ -49,19 +53,51 @@ public class PlayerControls : MonoBehaviour
     {
         if(canShoot)
         {
-            Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position + new Vector3 (0,0.25f,0), Quaternion.identity);
-            currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
+            ImprovedShooting();
 
-            gunSounds.Play();
-
-            Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
-            canShoot = false;
-            gun.SetBool("Shoot", true);
-            StartCoroutine(ShootDelay());
         }
 
     }
 
+    private bool ImprovedShooting()
+    {
+        bool enemyHit = false;
+      
+        RaycastHit hit;
+
+        //Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        
+        enemyHit = Physics.Raycast(transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
+        Debug.DrawRay(transform.position , lookAtPoint.forward * shotDistance, Color.cyan, 2.0f);
+        if (enemyHit)
+        {
+            Debug.Log("enemy hit");
+            Destroy(hit.collider.gameObject);
+        }
+
+        gunSounds.Play();
+
+        canShoot = false;
+        gun.SetBool("Shoot", true);
+        StartCoroutine(ShootDelay());
+
+        return enemyHit;
+    }
+
+    private void OldShooting()
+    {
+        Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
+        currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
+
+        gunSounds.Play();
+
+        Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
+        canShoot = false;
+        gun.SetBool("Shoot", true);
+        StartCoroutine(ShootDelay());
+
+       
+    }
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shotCooldown);
