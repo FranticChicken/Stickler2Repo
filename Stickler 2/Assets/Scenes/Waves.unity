@@ -3076,6 +3076,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: bulletTrail
+      value: 
+      objectReference: {fileID: 5208404102319691556, guid: af9dcd75f69d9af48bbed436c637af95,
+        type: 3}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 563116240}

@@ -18,6 +18,11 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float shotDistance = 1;
     [SerializeField] private Camera playerCamera;
 
+    [SerializeField] private ParticleSystem shootingSystem;
+    [SerializeField] private ParticleSystem impactParticleSystem;
+    [SerializeField] private TrailRenderer bulletTrail;
+
+
     Rigidbody rb;
     Vector3 movementVector;
     private Vector2 currentRotation;
@@ -68,6 +73,10 @@ public class PlayerControls : MonoBehaviour
         //Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
         
         enemyHit = Physics.Raycast(transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
+
+        TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+        StartCoroutine(SpawnTrail(trail,hit));
+
         Debug.DrawRay(transform.position , lookAtPoint.forward * shotDistance, Color.cyan, 2.0f);
         if (enemyHit)
         {
@@ -82,6 +91,25 @@ public class PlayerControls : MonoBehaviour
         StartCoroutine(ShootDelay());
 
         return enemyHit;
+    }
+
+    private IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
+    {
+        float time = 0; 
+        Vector3 startPos = Trail.transform.position;
+
+        while (time<1)
+        {
+            Trail.transform.position = Vector3.Lerp(startPos,Hit.point, time);
+            time += Time.deltaTime / Trail.time;
+
+            yield return null;
+        }
+        Trail.transform.position = Hit.point;
+        //Instantiate(ImpactParticleSystem, Hit.point, Trail.time);
+
+
+        Destroy(Trail.gameObject, Trail.time);
     }
 
     private void OldShooting()
