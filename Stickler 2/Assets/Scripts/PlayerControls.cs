@@ -34,6 +34,9 @@ public class PlayerControls : MonoBehaviour
 
     [SerializeField] private Animator gun = new Animator();
 
+    //camera shake stuff
+    public CameraShake cameraShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,6 +88,8 @@ public class PlayerControls : MonoBehaviour
         }
 
         gunSounds.Play();
+        cameraShake.ShakeCamera(2f, 0.3f);
+        Debug.Log("camera should shake /:");
 
         canShoot = false;
         gun.SetBool("Shoot", true);
