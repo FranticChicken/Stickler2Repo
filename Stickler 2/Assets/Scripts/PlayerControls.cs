@@ -70,15 +70,17 @@ public class PlayerControls : MonoBehaviour
     private bool ImprovedShooting()
     {
         bool enemyHit = false;
+       
       
         RaycastHit hit;
+        RaycastHit trailHit;
 
         //Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        
+        Physics.Raycast(transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
         TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
-        StartCoroutine(SpawnTrail(trail,hit));
+        StartCoroutine(SpawnTrail(trail,trailHit));
 
         Debug.DrawRay(transform.position , lookAtPoint.forward * shotDistance, Color.cyan, 2.0f);
         if (enemyHit)
