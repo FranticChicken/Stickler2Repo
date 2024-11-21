@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerControls : MonoBehaviour
 {
     [SerializeField] float speed = 1;
+    [SerializeField] private float acceleration;
+
     [SerializeField] private Rigidbody bulletPrefab;
     [SerializeField, Range(1, 20)] private float mouseSensX;
     [SerializeField, Range(1, 20)] private float mouseSensY;
@@ -21,7 +24,7 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private ParticleSystem shootingSystem;
     [SerializeField] private ParticleSystem impactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
-
+    [SerializeField] private GameObject bulletSpawnPoint;
 
     Rigidbody rb;
     Vector3 movementVector;
@@ -33,9 +36,18 @@ public class PlayerControls : MonoBehaviour
     private AudioSource gunSounds;
 
     [SerializeField] private Animator gun = new Animator();
+    [SerializeField] private Animator newGun = new Animator();
 
     //camera shake stuff
     public CameraShake cameraShake;
+
+    
+    private Vector3 targetVelocity;
+    
+
+    private float xVelocity;
+    private float yVelocity;
+    private float zVelocity;
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +60,17 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //rb.transform.position += new Vector3(movementVector.x, 0, movementVector.z) * speed * Time.deltaTime;
-        transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
+
+        //transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
+        Vector3 forwardDirection = transform.forward.normalized;
+        Vector3 rightDirection = transform.right.normalized;
+
+        Vector3 relativeMovement = (forwardDirection * movementVector.z + rightDirection * movementVector.x).normalized;
+
+        targetVelocity = relativeMovement * speed;
+        xVelocity = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.deltaTime);
+        zVelocity = Mathf.Lerp(rb.velocity.z, targetVelocity.z, acceleration * Time.deltaTime);
+        rb.velocity = new Vector3(xVelocity, rb.velocity.y, zVelocity);
     }
 
     void OnMove(InputValue movementValue)
@@ -79,7 +100,7 @@ public class PlayerControls : MonoBehaviour
         Physics.Raycast(transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
-        TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+        TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.transform.position, Quaternion.identity);
         StartCoroutine(SpawnTrail(trail,trailHit));
 
         Debug.DrawRay(transform.position , lookAtPoint.forward * shotDistance, Color.cyan, 2.0f);
@@ -94,7 +115,8 @@ public class PlayerControls : MonoBehaviour
         Debug.Log("camera should shake /:");
 
         canShoot = false;
-        gun.SetBool("Shoot", true);
+        newGun.SetBool("Shoot", true);
+        newGun.SetTrigger("shootTrigger");
         StartCoroutine(ShootDelay());
 
         return enemyHit;
@@ -136,7 +158,7 @@ public class PlayerControls : MonoBehaviour
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shotCooldown);
-        gun.SetBool("Shoot", false);
+        newGun.SetBool("Shoot", false);
         canShoot = true;
 
         yield return null;
