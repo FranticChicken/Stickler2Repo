@@ -8,6 +8,7 @@ TagManager:
   - Canvas
   - Crosshair
   - Gun
+  - waves
   layers:
   - Default
   - TransparentFX

@@ -11,11 +11,21 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] spawnPoints;
 
     // Time between spawns
-    public float spawnDelay = 5f;
+    public float spawnDelay;
     private float spawnTimer;
 
     // Number of enemies to spawn each time
     public int enemiesPerSpawn = 1;
+
+    //Wave Controller stuff
+    public WavesController waveControllerScript;
+    int waveNum = 1;
+    int numOfEnemiesSpawned;
+
+    private void Awake()
+    {
+        numOfEnemiesSpawned = 0;
+    }
 
     void Start()
     {
@@ -25,6 +35,9 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
+        //get spawnDelay depending on wave
+        spawnDelay = waveControllerScript.spawnDelay; 
+
         // Countdown the timer
         spawnTimer -= Time.deltaTime;
 
@@ -33,6 +46,12 @@ public class EnemySpawner : MonoBehaviour
         {
             SpawnEnemies();
             spawnTimer = spawnDelay; // Reset the timer
+        }
+
+        if(numOfEnemiesSpawned == waveControllerScript.numberOfEnemies)
+        {
+            //waveNum++;
+            numOfEnemiesSpawned = 0;
         }
     }
 
@@ -46,6 +65,14 @@ public class EnemySpawner : MonoBehaviour
 
             // Instantiate the enemy prefab at the chosen spawn point
             Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+
+            //count every time an enemy is spawned
+            numOfEnemiesSpawned++;
         }
+    }
+
+    public int ReturnWaveNum()
+    {
+        return waveNum;
     }
 }
