@@ -28,17 +28,20 @@ public class GameOverUI : MonoBehaviour
 
     void OnRestartButtonClick()
     {
-        
+        Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         crosshair.gameObject.SetActive(true);
-        
+        playerDead = false;
         SceneManager.LoadScene("Waves");
     }
 
     void OnMainMenuButtonClick()
     {
+        Time.timeScale = 1;
+        playerDead = false;
         SceneManager.LoadScene("Main Menu");
+
     }
 
     public void GameOver()
@@ -49,7 +52,7 @@ public class GameOverUI : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-
+            
             gameOverScreen.gameObject.SetActive(true);
             crosshair.gameObject.SetActive(false);
             
@@ -60,7 +63,10 @@ public class GameOverUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerDead)
+        {
+            Time.timeScale = 0;
+        }
        
     }
 }

@@ -44,6 +44,9 @@ public class PlayerControls : MonoBehaviour
     //waves counter
     private WavesController wavesControllerScript;
 
+    //mouse sense settings option
+    public PauseMenuUI pauseMenuScript; 
+
     private Vector3 targetVelocity;
     
 
@@ -58,6 +61,7 @@ public class PlayerControls : MonoBehaviour
         gunObject = GameObject.FindGameObjectWithTag("Gun");
         gunSounds = gunObject.GetComponent<AudioSource>();
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -74,6 +78,9 @@ public class PlayerControls : MonoBehaviour
         xVelocity = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.deltaTime);
         zVelocity = Mathf.Lerp(rb.velocity.z, targetVelocity.z, acceleration * Time.deltaTime);
         rb.velocity = new Vector3(xVelocity, rb.velocity.y, zVelocity);
+
+        mouseSensX = pauseMenuScript.mouseSense;
+        mouseSensY = pauseMenuScript.mouseSense;
     }
 
     void OnMove(InputValue movementValue)
