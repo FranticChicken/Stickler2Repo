@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask groundLayer;
 
-    private GameObject canvas;
+    private GameObject gameOverMenu;
     private GameOverUI gameOverUIScript;
     private Rigidbody rb;
 
@@ -22,8 +22,8 @@ public class EnemyScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GameObject.FindGameObjectWithTag("Canvas");
-        gameOverUIScript = canvas.GetComponent<GameOverUI>();
+        gameOverMenu = GameObject.FindGameObjectWithTag("Game Over");
+        gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player");
     }

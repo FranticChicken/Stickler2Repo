@@ -9,6 +9,8 @@ TagManager:
   - Crosshair
   - Gun
   - waves
+  - Pause Menu
+  - Game Over
   layers:
   - Default
   - TransparentFX

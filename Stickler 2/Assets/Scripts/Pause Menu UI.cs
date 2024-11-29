@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PauseMenuUI : MonoBehaviour
 {
@@ -23,9 +24,12 @@ public class PauseMenuUI : MonoBehaviour
 
     public GameOverUI gameOverScript;
 
+    public TextMeshProUGUI mouseSenseText;
+
     // Start is called before the first frame update
     void Start()
     {
+        
         resumeButton.onClick.AddListener(OnResumeButtonClick);
         quitButton.onClick.AddListener(OnQuitButtonClick);
         mouseSenseSlider.onValueChanged.AddListener(delegate {SliderValueChanged ();});
@@ -81,5 +85,6 @@ public class PauseMenuUI : MonoBehaviour
         }
 
         mouseSenseSlider.value = mouseSense;
+        mouseSenseText.text = "Mouse Sense: " + mouseSense.ToString("0.00");
     }
 }
