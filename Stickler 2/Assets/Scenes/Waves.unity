@@ -2736,7 +2736,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: 0.00012207031}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1411419449
@@ -3045,6 +3045,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 297681247}
   Pause: {fileID: 1107399424808701942, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
   mouseSense: 0
+  gameOverScript: {fileID: 1418962414}
 --- !u!1001 &1443993115
 PrefabInstance:
   m_ObjectHideFlags: 0

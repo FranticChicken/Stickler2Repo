@@ -19,6 +19,10 @@ public class PauseMenuUI : MonoBehaviour
 
     bool gamePaused = false;
 
+    bool gameOver = false;
+
+    public GameOverUI gameOverScript;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +36,10 @@ public class PauseMenuUI : MonoBehaviour
 
     void TogglePauseMenu(InputAction.CallbackContext context)
     {
-        gamePaused = !gamePaused;
+        if (gameOverScript.playerDead == false)
+        {
+            gamePaused = !gamePaused;
+        }
     }
 
     void OnResumeButtonClick()
@@ -65,7 +72,7 @@ public class PauseMenuUI : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-        else if (!gamePaused)
+        else if (!gamePaused && gameOverScript.playerDead == false)
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
