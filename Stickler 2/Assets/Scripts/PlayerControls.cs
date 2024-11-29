@@ -41,7 +41,9 @@ public class PlayerControls : MonoBehaviour
     //camera shake stuff
     public CameraShake cameraShake;
 
-    
+    //waves counter
+    private WavesController wavesControllerScript;
+
     private Vector3 targetVelocity;
     
 
@@ -55,6 +57,7 @@ public class PlayerControls : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         gunObject = GameObject.FindGameObjectWithTag("Gun");
         gunSounds = gunObject.GetComponent<AudioSource>();
+        wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
     }
 
     // Update is called once per frame
@@ -107,6 +110,7 @@ public class PlayerControls : MonoBehaviour
         if (enemyHit)
         {
             Debug.Log("enemy hit");
+            wavesControllerScript.spidersKilled++;
             Destroy(hit.collider.gameObject);
         }
 

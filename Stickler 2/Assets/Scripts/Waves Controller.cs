@@ -38,19 +38,19 @@ public class WavesController : MonoBehaviour
         
         if(waveNumber >= 5 && waveNumber <= 9)
         {
-            spawnDelay = 4f;
+            spawnDelay = 3f;
             numberOfEnemies = 6;
         }
 
         if(waveNumber >= 10 && waveNumber <= 14)
         {
-            spawnDelay = 3f;
+            spawnDelay = 2f;
             numberOfEnemies = 9;
         }
 
         if(waveNumber >= 15 && waveNumber <= 19)
         {
-            spawnDelay = 2f;
+            spawnDelay = 1f;
             numberOfEnemies = 12;
         }
 
