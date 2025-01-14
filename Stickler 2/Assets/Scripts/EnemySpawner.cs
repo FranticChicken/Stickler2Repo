@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     // Reference to the enemy prefab to spawn
     public GameObject Enemy;
+    public GameObject Enemy2;
+    public GameObject Enemy3;
 
     // List of spawn points
     public Transform[] spawnPoints;
@@ -36,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         //get spawnDelay depending on wave
-        spawnDelay = waveControllerScript.spawnDelay; 
+        spawnDelay = waveControllerScript.spawnDelay;
 
         // Countdown the timer
         spawnTimer -= Time.deltaTime;
@@ -63,8 +65,23 @@ public class EnemySpawner : MonoBehaviour
             int randomIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[randomIndex];
 
-            // Instantiate the enemy prefab at the chosen spawn point
-            Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+            if (waveControllerScript.enemyType == 1)
+            {
+                // Instantiate the enemy prefab at the chosen spawn point
+                Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+            }
+            else if(waveControllerScript.enemyType == 2)
+            {
+                // Instantiate the enemy prefab at the chosen spawn point
+                Instantiate(Enemy2, spawnPoint.position, spawnPoint.rotation);
+            }
+            else if (waveControllerScript.enemyType == 3)
+            {
+                // Instantiate the enemy prefab at the chosen spawn point
+                Instantiate(Enemy3, spawnPoint.position, spawnPoint.rotation);
+            }
+
+
 
             //count every time an enemy is spawned
             numOfEnemiesSpawned++;

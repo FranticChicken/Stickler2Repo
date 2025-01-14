@@ -1019,6 +1019,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 3705860560389701985, guid: 9dbf29dcc12a619408eff86467f5f978, type: 3}
+  Enemy2: {fileID: 6923558930049319143, guid: e24dceff4599347059e5f6329b6566b3, type: 3}
+  Enemy3: {fileID: 8133473053186417987, guid: 235f11e00b7714874825fe11bf3afa69, type: 3}
   spawnPoints:
   - {fileID: 1007481631}
   - {fileID: 1303290191}
@@ -4969,6 +4971,7 @@ MonoBehaviour:
   spawnDelay: 0
   numberOfEnemies: 0
   spidersKilled: 0
+  enemyType: 0
   waveNumText: {fileID: 639551598}
   enemySpawnerScript: {fileID: 393482748}
 --- !u!4 &1709622687
