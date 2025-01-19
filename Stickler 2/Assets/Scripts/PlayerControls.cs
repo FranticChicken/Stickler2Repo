@@ -45,7 +45,10 @@ public class PlayerControls : MonoBehaviour
     private WavesController wavesControllerScript;
 
     //mouse sense settings option
-    public PauseMenuUI pauseMenuScript; 
+    public PauseMenuUI pauseMenuScript;
+
+    //dialogue manager stuff
+    public DialogueManager dialogueManager;
 
     private Vector3 targetVelocity;
     
@@ -67,17 +70,21 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (dialogueManager.dialogueOver == true)
+        {
+            //transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
+            Vector3 forwardDirection = transform.forward.normalized;
+            Vector3 rightDirection = transform.right.normalized;
 
-        //transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
-        Vector3 forwardDirection = transform.forward.normalized;
-        Vector3 rightDirection = transform.right.normalized;
+            Vector3 relativeMovement = (forwardDirection * movementVector.z + rightDirection * movementVector.x).normalized;
 
-        Vector3 relativeMovement = (forwardDirection * movementVector.z + rightDirection * movementVector.x).normalized;
+            targetVelocity = relativeMovement * speed;
+            xVelocity = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.deltaTime);
+            zVelocity = Mathf.Lerp(rb.velocity.z, targetVelocity.z, acceleration * Time.deltaTime);
+            rb.velocity = new Vector3(xVelocity, rb.velocity.y, zVelocity);
+        }        
 
-        targetVelocity = relativeMovement * speed;
-        xVelocity = Mathf.Lerp(rb.velocity.x, targetVelocity.x, acceleration * Time.deltaTime);
-        zVelocity = Mathf.Lerp(rb.velocity.z, targetVelocity.z, acceleration * Time.deltaTime);
-        rb.velocity = new Vector3(xVelocity, rb.velocity.y, zVelocity);
+        
 
         mouseSensX = pauseMenuScript.mouseSense;
         mouseSensY = pauseMenuScript.mouseSense;
@@ -90,7 +97,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(canShoot)
+        if(canShoot && dialogueManager.dialogueOver == true)
         {
             ImprovedShooting();
 
@@ -176,18 +183,21 @@ public class PlayerControls : MonoBehaviour
     }
     void OnLook(InputValue lookValue)
     {
-        //controls rotation angles
-        currentRotation.x += lookValue.Get<Vector2>().x * Time.deltaTime * mouseSensX;
-        currentRotation.y += lookValue.Get<Vector2>().y * Time.deltaTime * -mouseSensY;
+        if (dialogueManager.dialogueOver == true)
+        {
+            //controls rotation angles
+            currentRotation.x += lookValue.Get<Vector2>().x * Time.deltaTime * mouseSensX;
+            currentRotation.y += lookValue.Get<Vector2>().y * Time.deltaTime * -mouseSensY;
 
-        //rotates left & right 
-        transform.rotation = Quaternion.AngleAxis(currentRotation.x, Vector3.up);
+            //rotates left & right 
+            transform.rotation = Quaternion.AngleAxis(currentRotation.x, Vector3.up);
 
-        //clamp rotation angles 
-        currentRotation.y = Mathf.Clamp(currentRotation.y, minViewAngle, maxViewAngle);
+            //clamp rotation angles 
+            currentRotation.y = Mathf.Clamp(currentRotation.y, minViewAngle, maxViewAngle);
 
-        //rotate up and down
-        lookAtPoint.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.right);
+            //rotate up and down
+            lookAtPoint.localRotation = Quaternion.AngleAxis(currentRotation.y, Vector3.right);
+        }
     }
 
 

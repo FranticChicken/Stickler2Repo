@@ -14,7 +14,7 @@ public class WavesController : MonoBehaviour
     [HideInInspector]
     public int numberOfEnemies;
     [HideInInspector]
-    public int spidersKilled;
+    public int spidersKilled = 0;
     [HideInInspector]
     public int enemyType;
 

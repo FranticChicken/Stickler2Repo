@@ -24,6 +24,9 @@ public class EnemySpawner : MonoBehaviour
     int waveNum = 1;
     int numOfEnemiesSpawned;
 
+    //dialogue Controller stuff
+    public DialogueManager dialogueManager;
+
     private void Awake()
     {
         numOfEnemiesSpawned = 0;
@@ -50,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
             spawnTimer = spawnDelay; // Reset the timer
         }
 
-        if(numOfEnemiesSpawned == waveControllerScript.numberOfEnemies)
+        if(numOfEnemiesSpawned == waveControllerScript.numberOfEnemies && waveControllerScript.numberOfEnemies == waveControllerScript.spidersKilled)
         {
             //waveNum++;
             numOfEnemiesSpawned = 0;
@@ -59,32 +62,35 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < enemiesPerSpawn; i++)
+        if (dialogueManager.dialogueOver == true && numOfEnemiesSpawned < waveControllerScript.numberOfEnemies)
         {
-            // Choose a random spawn point from the array
-            int randomIndex = Random.Range(0, spawnPoints.Length);
-            Transform spawnPoint = spawnPoints[randomIndex];
-
-            if (waveControllerScript.enemyType == 1)
+            for (int i = 0; i < enemiesPerSpawn; i++)
             {
-                // Instantiate the enemy prefab at the chosen spawn point
-                Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
-            }
-            else if(waveControllerScript.enemyType == 2)
-            {
-                // Instantiate the enemy prefab at the chosen spawn point
-                Instantiate(Enemy2, spawnPoint.position, spawnPoint.rotation);
-            }
-            else if (waveControllerScript.enemyType == 3)
-            {
-                // Instantiate the enemy prefab at the chosen spawn point
-                Instantiate(Enemy3, spawnPoint.position, spawnPoint.rotation);
-            }
+                // Choose a random spawn point from the array
+                int randomIndex = Random.Range(0, spawnPoints.Length);
+                Transform spawnPoint = spawnPoints[randomIndex];
+
+                if (waveControllerScript.enemyType == 1)
+                {
+                    // Instantiate the enemy prefab at the chosen spawn point
+                    Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+                }
+                else if (waveControllerScript.enemyType == 2)
+                {
+                    // Instantiate the enemy prefab at the chosen spawn point
+                    Instantiate(Enemy2, spawnPoint.position, spawnPoint.rotation);
+                }
+                else if (waveControllerScript.enemyType == 3)
+                {
+                    // Instantiate the enemy prefab at the chosen spawn point
+                    Instantiate(Enemy3, spawnPoint.position, spawnPoint.rotation);
+                }
 
 
 
-            //count every time an enemy is spawned
-            numOfEnemiesSpawned++;
+                //count every time an enemy is spawned
+                numOfEnemiesSpawned++;
+            }
         }
     }
 

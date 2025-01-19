@@ -26,6 +26,8 @@ public class PauseMenuUI : MonoBehaviour
 
     public TextMeshProUGUI mouseSenseText;
 
+    public DialogueManager dialogueManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +42,7 @@ public class PauseMenuUI : MonoBehaviour
 
     void TogglePauseMenu(InputAction.CallbackContext context)
     {
-        if (gameOverScript.playerDead == false)
+        if (gameOverScript.playerDead == false && dialogueManager.dialogueOver == true)
         {
             gamePaused = !gamePaused;
         }
