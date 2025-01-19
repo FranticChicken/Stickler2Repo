@@ -50,6 +50,11 @@ public class PlayerControls : MonoBehaviour
     //dialogue manager stuff
     public DialogueManager dialogueManager;
 
+    //health stuff
+    float maxHealth = 100;
+    float currentHealth;
+    public HealthBar healthBarScript;
+
     private Vector3 targetVelocity;
     
 
@@ -65,6 +70,9 @@ public class PlayerControls : MonoBehaviour
         gunSounds = gunObject.GetComponent<AudioSource>();
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        //set starting health to full
+        healthBarScript.UpdateHealthBar(maxHealth, currentHealth = 100);
     }
 
     // Update is called once per frame
@@ -88,6 +96,9 @@ public class PlayerControls : MonoBehaviour
 
         mouseSensX = pauseMenuScript.mouseSense;
         mouseSensY = pauseMenuScript.mouseSense;
+
+        //update health bar
+        healthBarScript.UpdateHealthBar(maxHealth, currentHealth);
     }
 
     void OnMove(InputValue movementValue)

@@ -24,6 +24,9 @@ public class WavesController : MonoBehaviour
     //Enemy Spawner Script
     public EnemySpawner enemySpawnerScript;
 
+    //Dialogue Manager Script
+    public DialogueManager dialogueManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +81,15 @@ public class WavesController : MonoBehaviour
             waveNumber++;
             spidersKilled = 0;
             Debug.Log("wave num should increase");
+        }
+
+        if(dialogueManager.dialogueOver == false)
+        {
+            waveNumText.gameObject.SetActive(false);
+        }
+        else
+        {
+            waveNumText.gameObject.SetActive(true);
         }
 
     }

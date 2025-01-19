@@ -18,7 +18,8 @@ public class PauseMenuUI : MonoBehaviour
 
     public float mouseSense; 
 
-    bool gamePaused = false;
+    [HideInInspector]
+    public bool gamePaused = false;
 
     bool gameOver = false;
 
@@ -27,6 +28,8 @@ public class PauseMenuUI : MonoBehaviour
     public TextMeshProUGUI mouseSenseText;
 
     public DialogueManager dialogueManager;
+
+    public GameObject crossHair;
 
     // Start is called before the first frame update
     void Start()
@@ -77,13 +80,19 @@ public class PauseMenuUI : MonoBehaviour
             pauseMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            crossHair.gameObject.SetActive(false);
         }
-        else if (!gamePaused && gameOverScript.playerDead == false)
+        else if(dialogueManager.dialogueOver == false)
+        {
+            crossHair.gameObject.SetActive(false);
+        }
+        else if (!gamePaused && gameOverScript.playerDead == false && dialogueManager.dialogueOver == true)
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            crossHair.gameObject.SetActive(true);
         }
 
         mouseSenseSlider.value = mouseSense;

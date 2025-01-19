@@ -17,6 +17,7 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector]
     public bool dialogueOver;
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -84,5 +85,7 @@ public class DialogueManager : MonoBehaviour
             
             dialogueOver = true;
         }
+
+        
     }
 }
