@@ -3886,6 +3886,8 @@ MonoBehaviour:
   - If one of these insects touches me, it'll definetely hurt!
   textSpeed: 0.05
   dialogueOver: 0
+  Click: {fileID: -1386541815972052256, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
+  Tab: {fileID: -3073367361231834352, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
 --- !u!1 &1196402808
 GameObject:
   m_ObjectHideFlags: 0

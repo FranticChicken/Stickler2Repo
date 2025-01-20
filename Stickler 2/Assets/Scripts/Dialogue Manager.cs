@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -17,7 +18,11 @@ public class DialogueManager : MonoBehaviour
     [HideInInspector]
     public bool dialogueOver;
 
-    
+    //controls
+    public InputActionReference Click;
+    public InputActionReference Tab;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +30,9 @@ public class DialogueManager : MonoBehaviour
         dialogueOver = false;
         dialogueText.text = string.Empty;
         StartDialogue();
+
+        Click.action.performed += Skip;
+        Tab.action.performed += Skip2;
     }
 
     void StartDialogue()
@@ -59,6 +67,29 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    void Skip(InputAction.CallbackContext context)
+    {
+        if (dialogueText.text == sentences[index])
+        {
+            NextLine();
+        }
+        else
+        {
+            StopAllCoroutines();
+            dialogueText.text = sentences[index];
+        }
+    }
+
+    void Skip2(InputAction.CallbackContext context)
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            dialogueBackground.gameObject.SetActive(false);
+
+            dialogueOver = true;
+        }
+    }
+
     //make text appear slowly 
     //make it so you can click to make text appear fully 
     //make it so there's a dialogue skip button 
@@ -66,25 +97,7 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if(dialogueText.text == sentences[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                dialogueText.text = sentences[index];
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            dialogueBackground.gameObject.SetActive(false);
-            
-            dialogueOver = true;
-        }
+       
 
         
     }

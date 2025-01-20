@@ -45,9 +45,11 @@ public class PauseMenuUI : MonoBehaviour
 
     void TogglePauseMenu(InputAction.CallbackContext context)
     {
+        Debug.Log("works here");
         if (gameOverScript.playerDead == false && dialogueManager.dialogueOver == true)
         {
             gamePaused = !gamePaused;
+            Debug.Log("also works here");
         }
     }
 

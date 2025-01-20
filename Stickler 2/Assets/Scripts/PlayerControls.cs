@@ -103,8 +103,6 @@ public class PlayerControls : MonoBehaviour
         //update health bar
         healthBarScript.UpdateHealthBar(maxHealth, currentHealth);
 
-        Debug.Log(currentHealth);
-
         //check if player is dead
         if(currentHealth <= 0)
         {
