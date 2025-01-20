@@ -7137,6 +7137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: gameOverScript
+      value: 
+      objectReference: {fileID: 1398901347}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 1182259766}

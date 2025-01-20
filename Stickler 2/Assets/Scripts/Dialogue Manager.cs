@@ -21,7 +21,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Time.timeScale = 1;
         dialogueOver = false;
         dialogueText.text = string.Empty;
         StartDialogue();

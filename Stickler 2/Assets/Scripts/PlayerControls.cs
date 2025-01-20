@@ -52,8 +52,11 @@ public class PlayerControls : MonoBehaviour
 
     //health stuff
     float maxHealth = 100;
-    float currentHealth;
+    [HideInInspector]
+    public float currentHealth;
     public HealthBar healthBarScript;
+    public GameOverUI gameOverScript;
+  
 
     private Vector3 targetVelocity;
     
@@ -78,7 +81,7 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueManager.dialogueOver == true)
+        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
         {
             //transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
             Vector3 forwardDirection = transform.forward.normalized;
@@ -99,6 +102,14 @@ public class PlayerControls : MonoBehaviour
 
         //update health bar
         healthBarScript.UpdateHealthBar(maxHealth, currentHealth);
+
+        Debug.Log(currentHealth);
+
+        //check if player is dead
+        if(currentHealth <= 0)
+        {
+            gameOverScript.GameOver();
+        }
     }
 
     void OnMove(InputValue movementValue)
@@ -108,7 +119,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(canShoot && dialogueManager.dialogueOver == true)
+        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
         {
             ImprovedShooting();
 
@@ -194,7 +205,7 @@ public class PlayerControls : MonoBehaviour
     }
     void OnLook(InputValue lookValue)
     {
-        if (dialogueManager.dialogueOver == true)
+        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
         {
             //controls rotation angles
             currentRotation.x += lookValue.Get<Vector2>().x * Time.deltaTime * mouseSensX;
@@ -211,6 +222,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-
     
+
+
 }

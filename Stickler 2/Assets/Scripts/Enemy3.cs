@@ -17,22 +17,30 @@ public class Enemy3 : MonoBehaviour
     private bool hit3;
     private bool hit4;
     private bool hitGround;
+
+    //damage/attack stuff
+    PlayerControls playerControlsScript;
+    float lastAttackTime;
+    float attackCoolDown = 2f;
+
     // Start is called before the first frame update
     void Start()
     {
         gameOverMenu = GameObject.FindGameObjectWithTag("Game Over");
         gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
         target = GameObject.FindGameObjectWithTag("Player");
+        playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
+        if (Time.time - lastAttackTime < attackCoolDown) return;
+
         if (collision.gameObject.tag == "Player")
         {
-            gameOverUIScript.GameOver();
-            Debug.Log("collided with player");
+            playerControlsScript.currentHealth -= 25f;
+            lastAttackTime = Time.time;
         }
-
     }
 
     private bool IsOnWall()
