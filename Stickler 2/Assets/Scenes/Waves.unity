@@ -3883,7 +3883,7 @@ MonoBehaviour:
   - Crap! The lab has been overrun by mutated insects!
   - Let's see how long I can survive against them with this gun.
   - I can press LEFT CLICK to shoot and WASD to move.
-  - If one of these insects touches me, I'm surely dead.
+  - If one of these insects touches me, it'll definetely hurt!
   textSpeed: 0.05
   dialogueOver: 0
 --- !u!1 &1196402808
