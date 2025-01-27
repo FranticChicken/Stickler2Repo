@@ -39,37 +39,37 @@ public class WavesController : MonoBehaviour
     {
         //waveNumber = enemySpawnerScript.ReturnWaveNum();
 
-        if (waveNumber >= 0 && waveNumber <= 4)
+        if (waveNumber >= 0 && waveNumber <= 2)
         {
             spawnDelay = 5f;
             numberOfEnemies = 3;
             enemyType = 1;
         }
         
-        if(waveNumber >= 5 && waveNumber <= 9)
+        if(waveNumber >= 3 && waveNumber <= 5)
         {
-            spawnDelay = 3f;
+            spawnDelay = 2f;
             numberOfEnemies = 6;
             enemyType = 2; 
         }
 
-        if(waveNumber >= 10 && waveNumber <= 14)
+        if(waveNumber >= 6 && waveNumber <= 8)
         {
-            spawnDelay = 2f;
+            spawnDelay = 0.5f;
             numberOfEnemies = 9;
             enemyType = 2;
         }
 
-        if(waveNumber >= 15 && waveNumber <= 19)
+        if(waveNumber >= 9 && waveNumber <= 11)
         {
-            spawnDelay = 1f;
+            spawnDelay = 0.5f;
             numberOfEnemies = 12;
             enemyType = 3;
         }
 
-        if(waveNumber >= 20)
+        if(waveNumber >= 12)
         {
-            spawnDelay = 1f;
+            spawnDelay = 0.5f;
             numberOfEnemies = 15;
             enemyType = 3;
         }
