@@ -8,7 +8,7 @@ public class WavesController : MonoBehaviour
 {
     //wave controller stats
     [HideInInspector]
-    int waveNumber;
+    public int waveNumber;
     [HideInInspector]
     public float spawnDelay;
     [HideInInspector]
