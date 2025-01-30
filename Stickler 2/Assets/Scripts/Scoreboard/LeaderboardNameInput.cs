@@ -8,7 +8,7 @@ public class LeaderboardNameInput : MonoBehaviour
 {
     public Button submitButton;
     public GameObject leaderboardBackground;
-    [SerializeField] ScoreboardSystem scoreboardSystemScript;
+    public Leaderboard leaderboardScript;
     string playerName;
     public WavesController wavesControllerScript;
     public TMP_InputField inputField;
@@ -27,7 +27,8 @@ public class LeaderboardNameInput : MonoBehaviour
         Debug.Log("submit button clicked");
         playerName = inputField.text;
         Debug.Log(playerName);
-        scoreboardSystemScript.AddHighscoreIfPossible(new HighscoreElement(playerName, wavesControllerScript.waveNumber));
+        //scoreboardSystemScript.AddHighscoreIfPossible(new HighscoreElement(playerName, wavesControllerScript.waveNumber));
+        leaderboardScript.AddHighscoreEntry(wavesControllerScript.waveNumber, playerName);
         leaderboardBackground.SetActive(false);
         submitClicked = true;
 

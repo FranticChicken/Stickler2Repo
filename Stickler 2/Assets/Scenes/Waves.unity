@@ -1766,7 +1766,7 @@ GameObject:
   - component: {fileID: 549164572}
   - component: {fileID: 549164571}
   m_Layer: 5
-  m_Name: Game Over Text
+  m_Name: Leaderboard Input Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You're apart of the top 10! Input your name to be apart of the leaderboard!
+  m_text: Enter your name to be apart of the leaderboard!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4933,7 +4933,7 @@ GameObject:
   - component: {fileID: 1398901346}
   - component: {fileID: 1398901347}
   - component: {fileID: 1398901349}
-  - component: {fileID: 1398901348}
+  - component: {fileID: 1398901350}
   m_Layer: 5
   m_Name: Game Over Screen
   m_TagString: Game Over
@@ -4978,20 +4978,6 @@ MonoBehaviour:
   mainMenuButton: {fileID: 2052897774}
   playerDead: 0
   gameOverScreen: {fileID: 107988639}
---- !u!114 &1398901348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1398901345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 991090d324a03df41aa75edc695e5281, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxCount: 10
-  filename: highscores.json
 --- !u!114 &1398901349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5006,10 +4992,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   submitButton: {fileID: 898243222}
   leaderboardBackground: {fileID: 1606624753}
-  scoreboardSystemScript: {fileID: 1398901348}
+  leaderboardScript: {fileID: 1398901350}
   wavesControllerScript: {fileID: 1709622686}
   inputField: {fileID: 1098214096}
   gameOverUIScript: {fileID: 1398901347}
+--- !u!114 &1398901350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398901345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e1b577c58b4d94fad9a03b9d136d95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryContainer: {fileID: 0}
+  entryTemplate: {fileID: 0}
 --- !u!1 &1411419449
 GameObject:
   m_ObjectHideFlags: 0
