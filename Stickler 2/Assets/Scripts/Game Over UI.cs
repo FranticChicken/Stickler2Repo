@@ -10,6 +10,9 @@ public class GameOverUI : MonoBehaviour
     public Button mainMenuButton;
     public bool playerDead = false;
     public GameObject gameOverScreen;
+    public Button scoreboardButton;
+    public GameObject scoreboardBackground;
+    public Button scoreboardBackButton;
 
     private GameObject crosshair; 
 
@@ -21,6 +24,8 @@ public class GameOverUI : MonoBehaviour
         //gameOverScreen = GameObject.Find("Game Over Screen");
         restartButton.onClick.AddListener(OnRestartButtonClick);
         mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
+        scoreboardButton.onClick.AddListener(OnScoreboardButtonClick);
+        scoreboardBackButton.onClick.AddListener(OnScoreboardBackButtonClick);
         
         gameOverScreen.gameObject.SetActive(false);
         crosshair = GameObject.FindGameObjectWithTag("Crosshair");
@@ -42,6 +47,16 @@ public class GameOverUI : MonoBehaviour
         playerDead = false;
         SceneManager.LoadScene("Main Menu");
 
+    }
+
+    void OnScoreboardButtonClick()
+    {
+        scoreboardBackground.SetActive(true);
+        Debug.Log("scoreboard button clicked");
+    }
+    void OnScoreboardBackButtonClick()
+    {
+        scoreboardBackground.SetActive(false);
     }
 
     public void GameOver()

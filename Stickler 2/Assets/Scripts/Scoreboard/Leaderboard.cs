@@ -11,6 +11,11 @@ public class Leaderboard : MonoBehaviour
     //List<HighscoreEntry> highscoreEntryList;
     List<Transform> highscoreEntryTransformList;
 
+    public WavesController wavesControllerScript;
+    
+    [HideInInspector]
+    public bool canSetNewHighscore = false;
+
     private void Awake()
     {
         //12:38
@@ -44,7 +49,15 @@ public class Leaderboard : MonoBehaviour
                 }
             }
         }
-        
+
+        //make highscore list max of 10
+        if (highscores.highscoreEntryList.Count > 10)
+        {
+            for (int h = highscores.highscoreEntryList.Count; h > 10; h--)
+            {
+                highscores.highscoreEntryList.RemoveAt(10);
+            }
+        }
 
         highscoreEntryTransformList = new List<Transform>();
         foreach(HighscoreEntry highscoreEntry in highscores.highscoreEntryList)
@@ -103,22 +116,86 @@ public class Leaderboard : MonoBehaviour
         //Add new entry to Highscores
         highscores.highscoreEntryList.Add(highscoreEntry);
 
+        //sort entry list by score
+
+        for (int i = 0; i < highscores.highscoreEntryList.Count; i++)
+        {
+            for (int j = i + 1; j < highscores.highscoreEntryList.Count; j++)
+            {
+                if (highscores.highscoreEntryList[j].score > highscores.highscoreEntryList[i].score)
+                {
+                    //swap
+                    HighscoreEntry tmp = highscores.highscoreEntryList[i];
+                    highscores.highscoreEntryList[i] = highscores.highscoreEntryList[j];
+                    highscores.highscoreEntryList[j] = tmp;
+                }
+            }
+        }
+
+        //make highscore list max of 10
+        if (highscores.highscoreEntryList.Count > 10)
+        {
+            for (int h = highscores.highscoreEntryList.Count; h > 10; h--)
+            {
+                highscores.highscoreEntryList.RemoveAt(10);
+            }
+        }
+
         //Save updated Highscores
         string json = JsonUtility.ToJson(highscores);
         PlayerPrefs.SetString("highscoreTable", json);
         PlayerPrefs.Save();
     }
 
-    private class Highscores
+    public class Highscores
     {
         public List<HighscoreEntry> highscoreEntryList;
     }
 
     //reps a single highscore entry
     [System.Serializable]
-    private class HighscoreEntry
+    public class HighscoreEntry
     {
         public int score;
         public string name;
+    }
+
+    private void Update()
+    {
+        //canSetNewHighscore = true;
+
+        //Load saved Highscores
+        string jsonString = PlayerPrefs.GetString("highscoreTable");
+        Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
+
+        //sort entry list by score
+
+        for (int i = 0; i < highscores.highscoreEntryList.Count; i++)
+        {
+            for (int j = i + 1; j < highscores.highscoreEntryList.Count; j++)
+            {
+                if (highscores.highscoreEntryList[j].score > highscores.highscoreEntryList[i].score)
+                {
+                    //swap
+                    HighscoreEntry tmp = highscores.highscoreEntryList[i];
+                    highscores.highscoreEntryList[i] = highscores.highscoreEntryList[j];
+                    highscores.highscoreEntryList[j] = tmp;
+                }
+            }
+        }
+
+        //if wave num is more than lowest score in leaderboard, set canSetNewHighScore to true
+        
+        if (wavesControllerScript.waveNumber > JsonUtility.FromJson<Highscores>(PlayerPrefs.GetString("highscoreTable")).highscoreEntryList[9].score)
+        {
+            canSetNewHighscore = true;
+        }
+        else
+        {
+            canSetNewHighscore = false;
+        }
+
+        Debug.Log(canSetNewHighscore);
+        
     }
 }

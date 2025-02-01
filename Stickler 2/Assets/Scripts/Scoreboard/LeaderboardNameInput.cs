@@ -7,7 +7,7 @@ using TMPro;
 public class LeaderboardNameInput : MonoBehaviour
 {
     public Button submitButton;
-    public GameObject leaderboardBackground;
+    public GameObject leaderboardInputBackground;
     public Leaderboard leaderboardScript;
     string playerName;
     public WavesController wavesControllerScript;
@@ -29,7 +29,7 @@ public class LeaderboardNameInput : MonoBehaviour
         Debug.Log(playerName);
         //scoreboardSystemScript.AddHighscoreIfPossible(new HighscoreElement(playerName, wavesControllerScript.waveNumber));
         leaderboardScript.AddHighscoreEntry(wavesControllerScript.waveNumber, playerName);
-        leaderboardBackground.SetActive(false);
+        leaderboardInputBackground.SetActive(false);
         submitClicked = true;
 
     }
@@ -37,9 +37,19 @@ public class LeaderboardNameInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameOverUIScript.playerDead == true && submitClicked == false)
+        /*if (wavesControllerScript.waveNumber > JsonUtility.FromJson<Highscores>(PlayerPrefs.GetString("highscoreTable")).highscoreEntryList[9].score)
         {
-            leaderboardBackground.SetActive(true);
+            canSetNewHighscore = true;
+        }
+        else
+        {
+            canSetNewHighscore = false;
+        }
+        */
+        //&& leaderboardScript.canSetNewHighscore == true
+        if (gameOverUIScript.playerDead == true && submitClicked == false && leaderboardScript.canSetNewHighscore == true)
+        {
+            leaderboardInputBackground.SetActive(true);
         }
     }
 }
