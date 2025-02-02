@@ -80,7 +80,7 @@ public class WavesController : MonoBehaviour
         {
             waveNumber++;
             spidersKilled = 0;
-            Debug.Log("wave num should increase");
+            //Debug.Log("wave num should increase");
         }
 
         if(dialogueManager.dialogueOver == false)

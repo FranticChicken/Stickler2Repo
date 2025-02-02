@@ -144,13 +144,28 @@ public class PlayerControls : MonoBehaviour
         if (enemyHit)
         {
             Debug.Log("enemy hit");
-            wavesControllerScript.spidersKilled++;
-            Destroy(hit.collider.gameObject);
+            
+            if(hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+                wavesControllerScript.spidersKilled++;
+                Debug.Log("enemy hit for real");
+            }
+            else if(hit.collider.gameObject.CompareTag("Enemy2"))
+            {
+                Debug.Log("enemy 2 hit");
+                hit.collider.gameObject.GetComponent<Enemy2>().healthPts -= 1f;
+            }
+            else if (hit.collider.gameObject.CompareTag("Enemy3"))
+            {
+                hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
+            }
+            
         }
 
         gunSounds.Play();
         cameraShake.ShakeCamera(2f, 0.3f);
-        Debug.Log("camera should shake /:");
+        //Debug.Log("camera should shake /:");
 
         canShoot = false;
         newGun.SetBool("Shoot", true);

@@ -195,7 +195,7 @@ public class Leaderboard : MonoBehaviour
             canSetNewHighscore = false;
         }
 
-        Debug.Log(canSetNewHighscore);
+        //Debug.Log(canSetNewHighscore);
         
     }
 }

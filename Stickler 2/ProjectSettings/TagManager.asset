@@ -11,6 +11,8 @@ TagManager:
   - waves
   - Pause Menu
   - Game Over
+  - Enemy2
+  - Enemy3
   layers:
   - Default
   - TransparentFX

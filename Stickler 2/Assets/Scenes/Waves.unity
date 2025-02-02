@@ -5823,7 +5823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitButton: {fileID: 898243222}
-  leaderboardInputBackground: {fileID: 0}
+  leaderboardInputBackground: {fileID: 1606624753}
   leaderboardScript: {fileID: 1398901350}
   wavesControllerScript: {fileID: 1709622686}
   inputField: {fileID: 1098214096}

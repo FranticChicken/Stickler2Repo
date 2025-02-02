@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy2 : MonoBehaviour
 {
@@ -23,13 +24,24 @@ public class Enemy2 : MonoBehaviour
     float lastAttackTime;
     float attackCoolDown = 2f;
 
+    //enemy health stuff
+    [HideInInspector]
+    public float healthPts;
+    float maxHealth;
+    WavesController wavesControllerScript;
+    Image healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
         gameOverMenu = GameObject.FindGameObjectWithTag("Game Over");
         gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
+        wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         target = GameObject.FindGameObjectWithTag("Player");
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
+        maxHealth = 2;
+        healthPts = maxHealth;
+        healthBar = transform.Find("Healthbar Canvas").transform.Find("Background").GetComponent<Image>();
     }
 
     private void OnCollisionStay(Collision collision)
@@ -86,8 +98,15 @@ public class Enemy2 : MonoBehaviour
             transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
         }
 
+        if(healthPts <= 0)
+        {
+            wavesControllerScript.spidersKilled++;
+            Destroy(gameObject);
 
+        }
 
+        healthBar.fillAmount = healthPts /maxHealth;
+        Debug.Log(healthPts);
 
     }
 }
