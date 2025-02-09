@@ -2155,7 +2155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -132}
+  m_AnchoredPosition: {x: 0, y: -62}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &883795061
@@ -2878,7 +2878,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1716273665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3610,7 +3610,6 @@ GameObject:
   - component: {fileID: 2069212635}
   - component: {fileID: 2069212634}
   - component: {fileID: 2069212638}
-  - component: {fileID: 2069212639}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3718,22 +3717,6 @@ MonoBehaviour:
   highscoreButton: {fileID: 1716273665}
   highscoreBackButton: {fileID: 2093371008}
   highscoreBackground: {fileID: 1644446801}
---- !u!114 &2069212639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069212633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e1b577c58b4d94fad9a03b9d136d95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  entryContainer: {fileID: 982322197}
-  entryTemplate: {fileID: 1868441202}
-  wavesControllerScript: {fileID: 0}
-  canSetNewHighscore: 0
 --- !u!1 &2093371004
 GameObject:
   m_ObjectHideFlags: 0
