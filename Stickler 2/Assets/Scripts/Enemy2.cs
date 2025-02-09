@@ -41,7 +41,7 @@ public class Enemy2 : MonoBehaviour
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
         maxHealth = 2;
         healthPts = maxHealth;
-        healthBar = transform.Find("Healthbar Canvas").transform.Find("Background").GetComponent<Image>();
+        healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
     }
 
     private void OnCollisionStay(Collision collision)

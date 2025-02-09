@@ -41,7 +41,7 @@ public class Enemy3 : MonoBehaviour
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         maxHealth = 3f;
         healthPts = maxHealth;
-        healthBar = transform.Find("Healthbar Canvas").transform.Find("Background").GetComponent<Image>();
+        healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
 
     }
 
