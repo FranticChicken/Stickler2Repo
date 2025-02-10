@@ -56,7 +56,10 @@ public class PlayerControls : MonoBehaviour
     public float currentHealth;
     public HealthBar healthBarScript;
     public GameOverUI gameOverScript;
-  
+
+    //ammmo stuff
+    public AmmoController ammoControllerScript;
+
 
     private Vector3 targetVelocity;
     
@@ -117,7 +120,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
+        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && ammoControllerScript.hasAmmo == true)
         {
             ImprovedShooting();
 
@@ -127,6 +130,9 @@ public class PlayerControls : MonoBehaviour
 
     private bool ImprovedShooting()
     {
+        //ammo stuff
+        ammoControllerScript.bullets -= 1;
+
         bool enemyHit = false;
        
       
