@@ -200,20 +200,7 @@ public class PlayerControls : MonoBehaviour
         Destroy(Trail.gameObject, Trail.time);
     }
 
-    private void OldShooting()
-    {
-        Rigidbody currentProjectile = Instantiate(bulletPrefab, transform.position + new Vector3(0, 0.25f, 0), Quaternion.identity);
-        currentProjectile.AddForce(lookAtPoint.forward * bulletForce, ForceMode.Impulse); //add instant force to shoot 
-
-        gunSounds.Play();
-
-        Destroy(currentProjectile.gameObject, 4); //destroy after 4 secs 
-        canShoot = false;
-        gun.SetBool("Shoot", true);
-        StartCoroutine(ShootDelay());
-
-       
-    }
+    
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shotCooldown);
