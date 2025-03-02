@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 5527956077243480119}
   - component: {fileID: 6265869525778992862}
   - component: {fileID: 559137598846752096}
+  - component: {fileID: 8922548323987251309}
   m_Layer: 7
   m_Name: Enemy 2
   m_TagString: Enemy2
@@ -508,6 +509,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   healthPts: 3
+--- !u!195 &8922548323987251309
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6923558930049319143}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &2544027469588624929
 PrefabInstance:
   m_ObjectHideFlags: 0

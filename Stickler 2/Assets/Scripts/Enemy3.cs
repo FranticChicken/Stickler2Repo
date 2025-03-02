@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Enemy3 : MonoBehaviour
 {
-    private GameObject target;
+    private Transform target;
+    NavMeshAgent agent;
     public int speed;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask groundLayer;
@@ -36,7 +38,8 @@ public class Enemy3 : MonoBehaviour
     {
         gameOverMenu = GameObject.FindGameObjectWithTag("Game Over");
         gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        agent = GetComponent<NavMeshAgent>();
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         maxHealth = 3f;
@@ -92,7 +95,8 @@ public class Enemy3 : MonoBehaviour
     {
         if (!IsOnWall())
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            agent.destination = target.position;
         }
         else
         {

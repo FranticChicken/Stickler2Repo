@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class Enemy2 : MonoBehaviour
 {
-    private GameObject target;
+    private Transform target;
+    NavMeshAgent agent;
     public int speed;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask groundLayer;
@@ -37,11 +39,14 @@ public class Enemy2 : MonoBehaviour
         gameOverMenu = GameObject.FindGameObjectWithTag("Game Over");
         gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
-        target = GameObject.FindGameObjectWithTag("Player");
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
         maxHealth = 2;
         healthPts = maxHealth;
         healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
+
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        agent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void OnCollisionStay(Collision collision)
@@ -91,7 +96,8 @@ public class Enemy2 : MonoBehaviour
     {
         if (!IsOnWall())
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            agent.destination = target.position;
         }
         else
         {

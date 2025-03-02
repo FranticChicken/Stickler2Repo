@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
 
-    private GameObject target;
+    private Transform target;
+    NavMeshAgent agent;
     public int speed;
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private LayerMask groundLayer;
@@ -33,7 +35,9 @@ public class EnemyScript : MonoBehaviour
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
         gameOverUIScript = gameOverMenu.GetComponent<GameOverUI>();
         rb = GetComponent<Rigidbody>();
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        agent = GetComponent<NavMeshAgent>();
+        
     }
 
     private void OnCollisionStay(Collision collision)
@@ -82,7 +86,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (!IsOnWall())
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            agent.destination = target.position;
         } 
         else
         {
