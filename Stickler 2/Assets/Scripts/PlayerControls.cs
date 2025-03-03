@@ -135,13 +135,14 @@ public class PlayerControls : MonoBehaviour
 
         bool enemyHit = false;
        
-      
+        //raycast for the bullet calculations
         RaycastHit hit;
+        //raycast for the visual bullet trail
         RaycastHit trailHit;
 
-        //Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
-        Physics.Raycast(transform.position, lookAtPoint.forward, out trailHit, shotDistance);
-        enemyHit = Physics.Raycast(transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
+        
+        Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
+        enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
         TrailRenderer trail = Instantiate(bulletTrail, bulletSpawnPoint.transform.position, Quaternion.identity);
         StartCoroutine(SpawnTrail(trail,trailHit));
