@@ -23,13 +23,13 @@ public class AmmoController : MonoBehaviour
     void Start()
     {
         Reload.action.performed += ReloadGun;
-        bullets = 10;
+        bullets = 9;
     }
 
     void ReloadGun(InputAction.CallbackContext context)
     {
-        //if R is pressed, bullets = 10 and canShoot = true
-        bullets = 10;
+        //if R is pressed, bullets = 9 and canShoot = true
+        bullets = 9;
     }
 
    
