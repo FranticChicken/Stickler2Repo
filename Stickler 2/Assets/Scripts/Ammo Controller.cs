@@ -17,21 +17,55 @@ public class AmmoController : MonoBehaviour
     public Image ammoImage;
     public DialogueManager dialogueManagerScript;
     public GameOverUI gameOverScript;
-    public PauseMenuUI pauseMenuScript; 
+    public PauseMenuUI pauseMenuScript;
+
+    //bool that lets game know if reload delay has played through or not and player can get their full amount of bullets
+    bool reloadReady;
+
+    bool canAutoReload;
+
+    //used to tell playerControls script that you cant shoot while reloading
+    [HideInInspector]
+    public bool isReloading;
 
     // Start is called before the first frame update
     void Start()
     {
         Reload.action.performed += ReloadGun;
-        bullets = 9;
+        bullets = 10;
+        reloadReady = false;
+        canAutoReload = false;
+        isReloading = false;
     }
 
     void ReloadGun(InputAction.CallbackContext context)
     {
-        //if R is pressed, bullets = 9 and canShoot = true
-        bullets = 9;
+        //if R is pressed, the reload delay will start
+        if (bullets != 10)
+        {
+            StartCoroutine(ReloadDelay());
+        }
+        
+        
+        
     }
 
+    void AutoReload()
+    {
+        //if R is pressed, the reload delay will start
+        StartCoroutine(ReloadDelay());
+    }
+
+    IEnumerator ReloadDelay()
+    {
+        isReloading = true;
+        //after 3 seconds, reloadReady bool is set to true
+        yield return new WaitForSeconds(3);
+        isReloading = false;
+        reloadReady = true;
+        canAutoReload = false;
+
+    }
    
 
     // Update is called once per frame
@@ -57,5 +91,24 @@ public class AmmoController : MonoBehaviour
             ammoImage.gameObject.SetActive(true);
         }
 
+        if (reloadReady == true)
+        {
+            //since reload delay has been completed, bullets are set to full amount
+            bullets = 10;
+            reloadReady = false;
+        }
+
+        if (hasAmmo == false && canAutoReload == false)
+        {
+            canAutoReload = true;
+            if (canAutoReload == true)
+            {
+          
+                AutoReload();
+                
+            }
+        }
+
+        
     }
 }

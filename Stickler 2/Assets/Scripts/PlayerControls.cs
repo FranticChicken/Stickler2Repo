@@ -120,7 +120,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && ammoControllerScript.hasAmmo == true)
+        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && ammoControllerScript.hasAmmo == true && ammoControllerScript.isReloading == false)
         {
             ImprovedShooting();
 

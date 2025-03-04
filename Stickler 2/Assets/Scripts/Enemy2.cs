@@ -98,6 +98,7 @@ public class Enemy2 : MonoBehaviour
         {
             //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             agent.destination = target.position;
+            
         }
         else
         {
