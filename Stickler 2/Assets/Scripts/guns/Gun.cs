@@ -6,21 +6,27 @@ public class Gun : MonoBehaviour
 {
     //parent class for each gun
 
-    [SerializeField] protected int damage;
-    [SerializeField] protected int magSize;    
-    [SerializeField] protected int reserveAmmo;
+    [SerializeField] protected int damage = 1;
+    [SerializeField] protected int magSize = 10;    
+    [SerializeField] protected int reserveAmmo = 20;
+    [SerializeField] protected int bulletsPerShot = 1; //this mostly applies for the eventual shotgun, all other guns will have this set to 1
     protected int currentAmmo;
 
-    [SerializeField] protected float fireRateRPM;
-    [SerializeField] protected float reloadSpeed;
+    [SerializeField] protected float fireRateRPM = 60; //measured in rounds per minute, RPM
+    [SerializeField] protected float reloadSpeed = 1.5f; //measured in seconds
     [SerializeField] protected float bloom;
-    [SerializeField] protected float shotDistance;
+    [SerializeField] protected float shotDistance = 50;
+
+    [SerializeField] protected bool isAutomatic = false; 
 
     [SerializeField] protected Animator gunAnimator;
+    [SerializeField] protected TrailRenderer bulletTrail;
+    [SerializeField] protected Transform bulletTrailOrigin;
 
     protected Transform lookAtPoint;
     protected LayerMask enemyLayer;
     protected float shotCooldown;
+    protected WavesController wavesControllerScript;
     protected bool canShoot = true;
 
     GameObject player;
@@ -31,12 +37,12 @@ public class Gun : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<PlayerControls>();
 
-        currentAmmo = magSize;
-
+        wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         
         enemyLayer = playerScript.enemyLayer;
 
-        shotCooldown = 60 / fireRateRPM; 
+        currentAmmo = magSize;
+        shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
     }
 
     protected void Shoot()
@@ -57,10 +63,39 @@ public class Gun : MonoBehaviour
         Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
+
+        
+        StartCoroutine(SpawnTrail( trailHit));
+    } 
+
+    protected void EnemyHit(bool enemyHit, RaycastHit hit)
+    {
+        if (enemyHit)
+        {
+            Debug.Log("enemy hit");
+
+            if (hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+                wavesControllerScript.spidersKilled++;
+                Debug.Log("enemy hit for real");
+            }
+            else if (hit.collider.gameObject.CompareTag("Enemy2"))
+            {
+                Debug.Log("enemy 2 hit");
+                hit.collider.gameObject.GetComponent<Enemy2>().healthPts -= 1f;
+            }
+            else if (hit.collider.gameObject.CompareTag("Enemy3"))
+            {
+                hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
+            }
+
+        }
     }
 
-    protected IEnumerator SpawnTrail(TrailRenderer Trail, RaycastHit Hit)
+    protected IEnumerator SpawnTrail(RaycastHit Hit)
     {
+        TrailRenderer Trail = Instantiate(bulletTrail, bulletTrailOrigin.position, Quaternion.identity);
         float time = 0;
         Vector3 startPos = Trail.transform.position;
 
