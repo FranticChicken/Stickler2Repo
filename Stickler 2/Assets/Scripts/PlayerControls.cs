@@ -14,10 +14,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField, Range(1, 20)] private float mouseSensY;
     [SerializeField, Range(-90, 0)] private float minViewAngle;
     [SerializeField, Range(0, 90)] private float maxViewAngle;
-    [SerializeField] private Transform lookAtPoint;
+    [SerializeField] public Transform lookAtPoint;
     [SerializeField] private float bulletForce;
     [SerializeField] float shotCooldown;
-    [SerializeField] private LayerMask enemyLayer;
+    [SerializeField] public LayerMask enemyLayer;
     [SerializeField] private float shotDistance = 1;
     [SerializeField] private Camera playerCamera;
 
@@ -172,7 +172,7 @@ public class PlayerControls : MonoBehaviour
 
         gunSounds.Play();
         cameraShake.ShakeCamera(2f, 0.3f);
-        //Debug.Log("camera should shake /:");
+        
 
         canShoot = false;
         newGun.SetBool("Shoot", true);
