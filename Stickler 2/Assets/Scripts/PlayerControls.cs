@@ -25,12 +25,13 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private ParticleSystem impactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
     [SerializeField] private GameObject bulletSpawnPoint;
+    [SerializeField] private Gun equippedGun;
 
     Rigidbody rb;
     Vector3 movementVector;
     private Vector2 currentRotation;
     private bool canShoot = true;
-    
+    public bool isShooting = false;
 
     private GameObject gunObject;
     private AudioSource gunSounds;
@@ -122,8 +123,9 @@ public class PlayerControls : MonoBehaviour
     {
         if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && ammoControllerScript.hasAmmo == true && ammoControllerScript.isReloading == false)
         {
-            ImprovedShooting();
 
+            ImprovedShooting();
+            //equippedGun.Shoot();
         }
 
     }

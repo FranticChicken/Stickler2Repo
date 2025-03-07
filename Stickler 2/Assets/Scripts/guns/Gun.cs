@@ -45,7 +45,8 @@ public class Gun : MonoBehaviour
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
     }
 
-    protected void Shoot()
+    
+    public void Shoot()
     {
         //declare necessary variables 
         bool enemyHit = false; 
@@ -63,31 +64,31 @@ public class Gun : MonoBehaviour
         Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
-
+        EnemyHit(enemyHit, hit);
         
-        StartCoroutine(SpawnTrail( trailHit));
+        StartCoroutine(SpawnTrail(trailHit));
     } 
 
     protected void EnemyHit(bool enemyHit, RaycastHit hit)
     {
         if (enemyHit)
         {
-            Debug.Log("enemy hit");
+            //Debug.Log("enemy hit");
 
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
                 Destroy(hit.collider.gameObject);
                 wavesControllerScript.spidersKilled++;
-                Debug.Log("enemy hit for real");
+                //Debug.Log("enemy hit for real");
             }
             else if (hit.collider.gameObject.CompareTag("Enemy2"))
             {
-                Debug.Log("enemy 2 hit");
-                hit.collider.gameObject.GetComponent<Enemy2>().healthPts -= 1f;
+                //Debug.Log("enemy 2 hit");
+                hit.collider.gameObject.GetComponent<Enemy2>().healthPts -= damage;
             }
             else if (hit.collider.gameObject.CompareTag("Enemy3"))
             {
-                hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
+                hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= damage;
             }
 
         }
@@ -114,7 +115,7 @@ public class Gun : MonoBehaviour
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shotCooldown);
-        gunAnimator.SetBool("Shoot", false);
+        //gunAnimator.SetBool("Shoot", false);
         canShoot = true;
 
         yield return null;
