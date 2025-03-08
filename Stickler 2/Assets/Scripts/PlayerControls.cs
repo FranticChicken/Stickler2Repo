@@ -125,9 +125,23 @@ public class PlayerControls : MonoBehaviour
         {
 
             ImprovedShooting();
-            //equippedGun.Shoot();
+            //equippedGun.BeginShooting();
+        } 
+
+        if (shootValue.isPressed)
+        {
+            Debug.Log("shoot"); 
+        } 
+        else if (!shootValue.isPressed)
+        {
+            Debug.Log("no shoot");
         }
 
+    }
+
+    void OnReload(InputValue reloadValue)
+    {
+        //equippedGun.BeginReload();
     }
 
     private bool ImprovedShooting()

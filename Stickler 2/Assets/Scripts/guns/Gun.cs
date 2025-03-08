@@ -13,7 +13,7 @@ public class Gun : MonoBehaviour
     protected int currentAmmo;
 
     [SerializeField] protected float fireRateRPM = 60; //measured in rounds per minute, RPM
-    [SerializeField] protected float reloadSpeed = 1.5f; //measured in seconds
+    [SerializeField] protected float reloadTime = 1.5f; //measured in seconds
     [SerializeField] protected float bloom;
     [SerializeField] protected float shotDistance = 50;
 
@@ -28,6 +28,8 @@ public class Gun : MonoBehaviour
     protected float shotCooldown;
     protected WavesController wavesControllerScript;
     protected bool canShoot = true;
+    protected bool isReloading = false;
+    protected bool isShooting = false;
 
     GameObject player;
     PlayerControls playerScript;
@@ -45,7 +47,37 @@ public class Gun : MonoBehaviour
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
     }
 
-    
+    public void BeginShooting(bool leftClickDown)
+    {
+        isShooting = leftClickDown;
+    }
+
+    public void BeginReload()
+    {
+        if (currentAmmo <  magSize)
+        {
+            canShoot = false;
+            StartCoroutine(Reload());
+        }    
+    }
+
+    private void RepeatShooting()
+    {
+        if (isShooting && canShoot)
+        {
+            if (isAutomatic)
+            {
+                while (isShooting && canShoot)
+                {
+                    Shoot();
+                }
+            } 
+            else if (!isAutomatic)
+            {
+                Shoot();
+            }
+        }      
+    }
     public void Shoot()
     {
         //declare necessary variables 
@@ -121,6 +153,24 @@ public class Gun : MonoBehaviour
         yield return null;
     }
 
+    private IEnumerator Reload()
+    {
+        yield return new WaitForSeconds(reloadTime);
 
+        if (reserveAmmo >= magSize)
+        {
+            currentAmmo = magSize;
+            reserveAmmo -= magSize;
+        } 
+        else if (reserveAmmo < magSize)
+        {
+            currentAmmo = reserveAmmo;
+            reserveAmmo = 0;
+        }
+
+        canShoot = true;
+
+        yield return null;
+    }
 
 }
