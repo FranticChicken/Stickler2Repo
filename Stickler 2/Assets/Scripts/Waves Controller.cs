@@ -20,6 +20,7 @@ public class WavesController : MonoBehaviour
 
     //wave number UI
     public TextMeshProUGUI waveNumText;
+    public TextMeshProUGUI waveNumText2;
 
     //Enemy Spawner Script
     public EnemySpawner enemySpawnerScript;
@@ -27,11 +28,14 @@ public class WavesController : MonoBehaviour
     //Dialogue Manager Script
     public DialogueManager dialogueManager;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
     {
         waveNumber = 1;
+        
     }
 
     // Update is called once per frame
@@ -75,21 +79,38 @@ public class WavesController : MonoBehaviour
         }
 
         waveNumText.text = "Wave " + waveNumber.ToString();
+        waveNumText2.text = "Wave " + waveNumber.ToString();
 
         if(spidersKilled == numberOfEnemies)
         {
             waveNumber++;
             spidersKilled = 0;
             //Debug.Log("wave num should increase");
+            StartCoroutine(NewWaveEffect());
         }
 
-        if(dialogueManager.dialogueOver == false)
+        IEnumerator NewWaveEffect()
         {
             waveNumText.gameObject.SetActive(false);
+            waveNumText2.gameObject.SetActive(true);
+            
+
+            yield return new WaitForSeconds(3);
+
+            waveNumText.gameObject.SetActive(true);
+            waveNumText2.gameObject.SetActive(false);
+            
+        }
+
+        if (dialogueManager.dialogueOver == false)
+        {
+            waveNumText.gameObject.SetActive(false);
+
         }
         else
         {
             waveNumText.gameObject.SetActive(true);
+            
         }
 
     }
