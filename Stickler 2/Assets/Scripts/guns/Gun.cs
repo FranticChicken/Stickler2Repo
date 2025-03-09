@@ -45,6 +45,8 @@ public class Gun : MonoBehaviour
 
         currentAmmo = magSize;
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
+
+        UpdateAmmoText();
     }
 
     
@@ -111,7 +113,7 @@ public class Gun : MonoBehaviour
 
         //reduces ammo remaining in magazine 
         currentAmmo--;
-
+        UpdateAmmoText();
 
         Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
@@ -189,18 +191,13 @@ public class Gun : MonoBehaviour
         canShoot = false;
         isReloading = true; 
 
-        yield return new WaitForSeconds(reloadTime);
+        yield return new WaitForSeconds(reloadTime);       
 
-        if (reserveAmmo >= magSize) // if you have enough reserve ammo to fully reload gun
-        {
-            currentAmmo = magSize;
-            reserveAmmo -= magSize;
-        } 
-        else if (reserveAmmo < magSize) // if you have less reserve ammo than the magazine size
-        {
-            currentAmmo = reserveAmmo;
-            reserveAmmo = 0;
-        }
+        int x = magSize - currentAmmo;
+        currentAmmo += x;
+        reserveAmmo -= x;
+
+        UpdateAmmoText();
 
         if (currentAmmo != 0)
         {
@@ -210,5 +207,11 @@ public class Gun : MonoBehaviour
 
         yield return null;
     }
+
+    private void UpdateAmmoText()
+    {
+        playerScript.SetCurrentAmmo(currentAmmo, reserveAmmo);
+        
+    } 
 
 }

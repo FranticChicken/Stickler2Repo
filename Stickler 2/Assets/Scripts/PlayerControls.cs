@@ -24,14 +24,17 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private ParticleSystem shootingSystem;
     [SerializeField] private ParticleSystem impactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
+
     [SerializeField] private GameObject bulletSpawnPoint;
     [SerializeField] private Gun equippedGun;
+    private int currentAmmo;
+    [SerializeField] private AmmoDisplay ammoDisplay;
 
     Rigidbody rb;
     Vector3 movementVector;
     private Vector2 currentRotation;
     private bool canShoot = true;
-    public bool isShooting = false;
+    [HideInInspector] public bool isShooting = false;
 
     private GameObject gunObject;
     private AudioSource gunSounds;
@@ -130,27 +133,36 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(canShoot && dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && ammoControllerScript.hasAmmo == true && ammoControllerScript.isReloading == false)
+        if(dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
         {
 
-            ImprovedShooting();
-            //equippedGun.BeginShooting();
+            //ImprovedShooting();
+
+            if (shootValue.isPressed)
+            {
+                equippedGun.BeginShooting(true);
+                
+            }
+            else if (!shootValue.isPressed)
+            {
+                equippedGun.BeginShooting(false);
+                
+            }
+
         } 
 
-        if (shootValue.isPressed)
-        {
-            
-        } 
-        else if (!shootValue.isPressed)
-        {
-            
-        }
+       
 
     }
 
     void OnReload(InputValue reloadValue)
     {
-        //equippedGun.BeginReload();
+        equippedGun.BeginReload();
+    }
+
+    public void SetCurrentAmmo(int ammo, int reserveAmmo)
+    {
+        ammoDisplay.UpdateAmmo(ammo, reserveAmmo);
     }
 
     private bool ImprovedShooting()
