@@ -47,20 +47,18 @@ public class Gun : MonoBehaviour
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
     }
 
+    
     public void BeginShooting(bool leftClickDown)
     {
         isShooting = leftClickDown;
-    }
 
-    public void BeginReload()
-    {
-        if (currentAmmo <  magSize)
+        if (isShooting && canShoot)
         {
-            canShoot = false;
-            StartCoroutine(Reload());
-        }    
+            StartCoroutine(ShootDelay());
+        }
     }
 
+   
     private void RepeatShooting()
     {
         if (isShooting && canShoot)
@@ -78,6 +76,27 @@ public class Gun : MonoBehaviour
             }
         }      
     }
+    private IEnumerator ShootDelay()
+    {
+        if (isAutomatic)
+        {
+            while (isShooting && canShoot)
+            {
+                Shoot(); 
+                yield return new WaitForSeconds(shotCooldown);
+            }
+        } 
+        else if (!isAutomatic)
+        {
+            Shoot();
+            canShoot = false;
+            yield return new WaitForSeconds(shotCooldown);
+            canShoot = true;
+        }
+
+        yield return null;
+    }
+
     public void Shoot()
     {
         //declare necessary variables 
@@ -93,12 +112,23 @@ public class Gun : MonoBehaviour
         //reduces ammo remaining in magazine 
         currentAmmo--;
 
+
         Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
 
         EnemyHit(enemyHit, hit);
         
-        StartCoroutine(SpawnTrail(trailHit));
+        StartCoroutine(SpawnTrail(trailHit)); 
+
+        if (currentAmmo == 0 ) // magazine is empty
+        {
+            canShoot = false; 
+
+            if (!isReloading)
+            {
+                StartCoroutine(Reload());
+            }            
+        }
     } 
 
     protected void EnemyHit(bool enemyHit, RaycastHit hit)
@@ -144,31 +174,39 @@ public class Gun : MonoBehaviour
         Destroy(Trail.gameObject, Trail.time);
     }
 
-    private IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(shotCooldown);
-        //gunAnimator.SetBool("Shoot", false);
-        canShoot = true;
+    
 
-        yield return null;
+    public void BeginReload()
+    {
+        if (currentAmmo < magSize && !isReloading)
+        {      
+            StartCoroutine(Reload());
+        }
     }
 
     private IEnumerator Reload()
     {
+        canShoot = false;
+        isReloading = true; 
+
         yield return new WaitForSeconds(reloadTime);
 
-        if (reserveAmmo >= magSize)
+        if (reserveAmmo >= magSize) // if you have enough reserve ammo to fully reload gun
         {
             currentAmmo = magSize;
             reserveAmmo -= magSize;
         } 
-        else if (reserveAmmo < magSize)
+        else if (reserveAmmo < magSize) // if you have less reserve ammo than the magazine size
         {
             currentAmmo = reserveAmmo;
             reserveAmmo = 0;
         }
 
-        canShoot = true;
+        if (currentAmmo != 0)
+        {
+            canShoot = true;
+        }
+        isReloading = false;
 
         yield return null;
     }

@@ -139,11 +139,11 @@ public class PlayerControls : MonoBehaviour
 
         if (shootValue.isPressed)
         {
-            Debug.Log("shoot"); 
+            
         } 
         else if (!shootValue.isPressed)
         {
-            Debug.Log("no shoot");
+            
         }
 
     }
