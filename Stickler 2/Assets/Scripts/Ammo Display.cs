@@ -38,7 +38,8 @@ public class AmmoDisplay : MonoBehaviour
 
     public void UpdateAmmo(int ammo, int reserveAmmo)
     {
-        ammoText.text = ammo.ToString();
-        reserveAmmoText.text = reserveAmmo.ToString();
+        ammoText.text = ammo.ToString() + "/" + reserveAmmo.ToString();
+        //ammoText.text = ammo.ToString();
+        //reserveAmmoText.text = reserveAmmo.ToString();
     }
 }
