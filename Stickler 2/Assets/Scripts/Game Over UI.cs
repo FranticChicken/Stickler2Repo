@@ -82,6 +82,7 @@ public class GameOverUI : MonoBehaviour
         {
             Time.timeScale = 0;
         }
-       
+
+        
     }
 }
