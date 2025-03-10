@@ -139,6 +139,7 @@ public class Gun : MonoBehaviour
 
             if (!isReloading)
             {
+                audioSource.Stop();
                 StartCoroutine(Reload());
             }            
         }
