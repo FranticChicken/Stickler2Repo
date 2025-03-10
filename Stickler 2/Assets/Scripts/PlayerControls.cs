@@ -26,7 +26,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private TrailRenderer bulletTrail;
 
     [SerializeField] private GameObject bulletSpawnPoint;
-    [SerializeField] private Gun equippedGun;
+    [SerializeField] private Gun gun1;
+    [SerializeField] private Gun gun2;
+    private Gun equippedGun;
     private int currentAmmo;
     [SerializeField] private AmmoDisplay ammoDisplay;
 
@@ -86,6 +88,8 @@ public class PlayerControls : MonoBehaviour
         gunSounds = gunObject.GetComponent<AudioSource>();
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         Cursor.lockState = CursorLockMode.Locked;
+
+        equippedGun = gun1;
 
         //set starting health to full
         healthBarScript.UpdateHealthBar(maxHealth, currentHealth = 100);

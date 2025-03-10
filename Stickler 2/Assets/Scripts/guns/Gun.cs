@@ -20,6 +20,8 @@ public class Gun : MonoBehaviour
     [SerializeField] protected bool isAutomatic = false; 
 
     [SerializeField] protected Animator gunAnimator;
+    [SerializeField] private AudioClip shootSFX;
+    [SerializeField] private AudioClip reloadSFX;
     [SerializeField] protected TrailRenderer bulletTrail;
     [SerializeField] protected Transform bulletTrailOrigin;
 
@@ -30,6 +32,8 @@ public class Gun : MonoBehaviour
     protected bool canShoot = true;
     protected bool isReloading = false;
     protected bool isShooting = false;
+
+    private AudioSource audioSource;
 
     GameObject player;
     PlayerControls playerScript;
@@ -45,6 +49,9 @@ public class Gun : MonoBehaviour
 
         currentAmmo = magSize;
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = shootSFX;
 
         UpdateAmmoText();
     }
@@ -96,6 +103,8 @@ public class Gun : MonoBehaviour
             canShoot = true;
         }
 
+        audioSource.Stop();
+
         yield return null;
     }
 
@@ -114,6 +123,8 @@ public class Gun : MonoBehaviour
         //reduces ammo remaining in magazine 
         currentAmmo--;
         UpdateAmmoText();
+
+        audioSource.Play();
 
         Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
         enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
@@ -189,7 +200,10 @@ public class Gun : MonoBehaviour
     private IEnumerator Reload()
     {
         canShoot = false;
-        isReloading = true; 
+        isReloading = true;
+
+        audioSource.clip = reloadSFX;
+        audioSource.Play();
 
         yield return new WaitForSeconds(reloadTime);       
 
@@ -203,6 +217,10 @@ public class Gun : MonoBehaviour
         {
             canShoot = true;
         }
+
+        audioSource.Stop();
+        audioSource.clip = shootSFX;
+
         isReloading = false;
 
         yield return null;
