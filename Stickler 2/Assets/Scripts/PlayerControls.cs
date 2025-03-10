@@ -66,6 +66,13 @@ public class PlayerControls : MonoBehaviour
     //ammmo stuff
     public AmmoController ammoControllerScript;
 
+    //swap gun stuff
+    public InputActionReference SwapGunInput;
+    public GameObject aR1;
+    public GameObject aR2;
+    public GameObject pistol1;
+    public GameObject pistol2;
+
 
     private Vector3 targetVelocity;
     
@@ -90,12 +97,16 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         equippedGun = gun1;
+        pistol1.SetActive(false);
+        pistol2.SetActive(false);
 
         //set starting health to full
         healthBarScript.UpdateHealthBar(maxHealth, currentHealth = 100);
 
         //sets upper step ray's pos to stepHeight float so that we can change it in the inspector
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeight, stepRayUpper.transform.position.z);
+
+        SwapGunInput.action.performed += SwapGun;
     }
 
     // Update is called once per frame
@@ -308,5 +319,28 @@ public class PlayerControls : MonoBehaviour
                 rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
             }
         }
+    }
+
+    void SwapGun(InputAction.CallbackContext context)
+    {
+        /*
+        if(equippedGun == gun1)
+        {
+            equippedGun = gun2;
+
+            aR1.SetActive(false);
+            aR2.SetActive(false);
+            pistol1.SetActive(true);
+            pistol2.SetActive(true);
+
+        }
+        else if(equippedGun == gun2)
+        {
+            aR1.SetActive(true);
+            aR2.SetActive(true);
+            pistol1.SetActive(false);
+            pistol2.SetActive(false);
+        }
+        */
     }
 }
