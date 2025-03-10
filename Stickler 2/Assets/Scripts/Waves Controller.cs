@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+
+
 public class WavesController : MonoBehaviour
 {
     //wave controller stats
@@ -17,6 +20,8 @@ public class WavesController : MonoBehaviour
     public int spidersKilled = 0;
     [HideInInspector]
     public int enemyType;
+
+    public List<WaveData> test2;
 
     //wave number UI
     public TextMeshProUGUI waveNumText;
@@ -114,4 +119,11 @@ public class WavesController : MonoBehaviour
         }
 
     }
+}
+
+[System.Serializable]
+public struct WaveData
+{
+
+    public float test;
 }
