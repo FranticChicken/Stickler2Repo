@@ -252,9 +252,11 @@ MonoBehaviour:
   fireRateRPM: 240
   reloadTime: 1.5
   bloom: 0
-  shotDistance: 50
+  shotDistance: 75
   isAutomatic: 1
   gunAnimator: {fileID: 0}
+  shootSFX: {fileID: 8300000, guid: 6f0a52664e43d8849b1a5aedfabaa2fb, type: 3}
+  reloadSFX: {fileID: 8300000, guid: 35841ae1a9243b74a962581fb647f702, type: 3}
   bulletTrail: {fileID: 5208404102319691556, guid: af9dcd75f69d9af48bbed436c637af95,
     type: 3}
   bulletTrailOrigin: {fileID: 347447189681230650}

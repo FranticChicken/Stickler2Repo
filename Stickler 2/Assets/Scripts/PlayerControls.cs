@@ -97,8 +97,7 @@ public class PlayerControls : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         equippedGun = gun1;
-        pistol1.SetActive(false);
-        pistol2.SetActive(false);
+        
 
         //set starting health to full
         healthBarScript.UpdateHealthBar(maxHealth, currentHealth = 100);
@@ -323,24 +322,30 @@ public class PlayerControls : MonoBehaviour
 
     void SwapGun(InputAction.CallbackContext context)
     {
-        /*
-        if(equippedGun == gun1)
+        
+        if(equippedGun == gun1 && gun1.GetCanShoot())
         {
             equippedGun = gun2;
 
-            aR1.SetActive(false);
-            aR2.SetActive(false);
-            pistol1.SetActive(true);
-            pistol2.SetActive(true);
+            gun1.gameObject.SetActive(false); 
+            gun2.gameObject.SetActive(true);
+
+            SetCurrentAmmo(gun2.GetAmmo(), gun2.GetReserveAmmo());
+
+            gun2.SetIsReloading(false);
 
         }
-        else if(equippedGun == gun2)
+        else if(equippedGun == gun2 && gun2.GetCanShoot())
         {
-            aR1.SetActive(true);
-            aR2.SetActive(true);
-            pistol1.SetActive(false);
-            pistol2.SetActive(false);
+            equippedGun = gun1;
+
+            gun1.gameObject.SetActive(true);
+            gun2.gameObject.SetActive(false);
+
+            SetCurrentAmmo(gun1.GetAmmo(), gun1.GetReserveAmmo());
+
+            gun1.SetIsReloading(false);
         }
-        */
+        
     }
 }

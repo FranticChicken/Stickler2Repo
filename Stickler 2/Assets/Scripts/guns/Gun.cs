@@ -32,6 +32,7 @@ public class Gun : MonoBehaviour
     protected bool canShoot = true;
     protected bool isReloading = false;
     protected bool isShooting = false;
+    private bool hasAmmo = true;
 
     private AudioSource audioSource;
 
@@ -56,9 +57,21 @@ public class Gun : MonoBehaviour
         UpdateAmmoText();
     }
 
-    
+    private void Update()
+    {
+        if (currentAmmo == 0)
+        {
+            hasAmmo = false;
+        } 
+        else if (currentAmmo > 0)
+        {
+            hasAmmo = true;
+        }
+    }
+
     public void BeginShooting(bool leftClickDown)
     {
+        
         isShooting = leftClickDown;
 
         if (isShooting && canShoot)
@@ -89,11 +102,13 @@ public class Gun : MonoBehaviour
     {
         if (isAutomatic)
         {
-            while (isShooting && canShoot)
+            canShoot = false;
+            while (isShooting && hasAmmo)
             {
                 Shoot(); 
-                yield return new WaitForSeconds(shotCooldown);
+                yield return new WaitForSeconds(shotCooldown);            
             }
+            canShoot = true;
         } 
         else if (!isAutomatic)
         {
@@ -200,6 +215,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        audioSource.Stop();
         canShoot = false;
         isReloading = true;
 
@@ -231,6 +247,25 @@ public class Gun : MonoBehaviour
     {
         playerScript.SetCurrentAmmo(currentAmmo, reserveAmmo);
         
+    }
+
+    public int GetAmmo()
+    {
+        return currentAmmo; 
     } 
+    public int GetReserveAmmo()
+    {
+        return reserveAmmo;
+    } 
+
+    public void SetIsReloading(bool x)
+    {
+        isReloading = x;
+    } 
+
+    public bool GetCanShoot()
+    {
+        return canShoot;
+    }
 
 }
