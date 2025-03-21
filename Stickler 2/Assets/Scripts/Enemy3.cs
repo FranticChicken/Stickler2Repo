@@ -33,6 +33,8 @@ public class Enemy3 : MonoBehaviour
     WavesController wavesControllerScript;
     Image healthBar;
 
+    bool colliding;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,10 +48,13 @@ public class Enemy3 : MonoBehaviour
         healthPts = maxHealth;
         healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
 
+        colliding = false;
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        colliding = true;
+
         if (Time.time - lastAttackTime < attackCoolDown) return;
 
         if (collision.gameObject.tag == "Player")
@@ -57,6 +62,11 @@ public class Enemy3 : MonoBehaviour
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        colliding = false;
     }
 
     private bool IsOnWall()
@@ -93,7 +103,7 @@ public class Enemy3 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWall())
+        if (!IsOnWall() && colliding == false)
         {
             //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             agent.destination = target.position;

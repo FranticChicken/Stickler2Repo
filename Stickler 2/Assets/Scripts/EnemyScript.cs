@@ -27,6 +27,8 @@ public class EnemyScript : MonoBehaviour
     float lastAttackTime;
     float attackCoolDown = 2f;
 
+    bool colliding;
+
 
     // Start is called before the first frame update
     void Start()
@@ -37,11 +39,14 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
+        colliding = false;
         
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        colliding = true;
+
         if (Time.time - lastAttackTime < attackCoolDown) return;
 
         if (collision.gameObject.tag == "Player")
@@ -49,6 +54,11 @@ public class EnemyScript : MonoBehaviour
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        colliding = false;
     }
 
     private bool IsOnWall()
@@ -84,7 +94,7 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWall())
+        if (!IsOnWall() && colliding == false)
         {
             agent.destination = target.position;
         } 

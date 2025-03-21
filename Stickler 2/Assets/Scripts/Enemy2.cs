@@ -26,12 +26,21 @@ public class Enemy2 : MonoBehaviour
     float lastAttackTime;
     float attackCoolDown = 2f;
 
+    //projectile stuff
+    float bulletTime;
+    float timer = 5f;
+    public GameObject projectile;
+    public Transform projectileSpawnPoint;
+    float projectileSpeed = 1000f;
+
     //enemy health stuff
     [HideInInspector]
     public float healthPts;
     float maxHealth;
     WavesController wavesControllerScript;
     Image healthBar;
+
+    bool colliding;
 
     // Start is called before the first frame update
     void Start()
@@ -46,11 +55,15 @@ public class Enemy2 : MonoBehaviour
 
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
+
+        colliding = false;
         
     }
 
     private void OnCollisionStay(Collision collision)
     {
+        colliding = true;
+
         if (Time.time - lastAttackTime < attackCoolDown) return;
 
         if (collision.gameObject.tag == "Player")
@@ -58,6 +71,27 @@ public class Enemy2 : MonoBehaviour
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
         }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        colliding = false;
+    }
+
+    void ShootPlayer()
+    {
+        bulletTime -= Time.deltaTime;
+
+        if (bulletTime > 0) return;
+
+        bulletTime = timer;
+
+        Debug.Log("shoot player function is working");
+
+        GameObject bulletObj = Instantiate(projectile, projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation) as GameObject;
+        Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
+        bulletRig.AddForce(bulletRig.transform.forward * projectileSpeed);
+
     }
 
     private bool IsOnWall()
@@ -94,7 +128,7 @@ public class Enemy2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOnWall())
+        if (!IsOnWall() && colliding == false)
         {
             //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             agent.destination = target.position;
@@ -114,6 +148,8 @@ public class Enemy2 : MonoBehaviour
 
         healthBar.fillAmount = healthPts /maxHealth;
         Debug.Log(healthPts);
+
+        ShootPlayer();
 
     }
 }
