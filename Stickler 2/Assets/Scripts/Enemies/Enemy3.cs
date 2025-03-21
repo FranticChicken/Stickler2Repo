@@ -35,6 +35,14 @@ public class Enemy3 : MonoBehaviour
 
     bool colliding;
 
+    //baby spider spawn stuff
+    public Transform babySpiderSpawn1;
+    public Transform babySpiderSpawn2;
+    public Transform babySpiderSpawn3;
+    public Transform babySpiderSpawn4;
+    public GameObject babySpider;
+    bool babysSpawned;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +57,7 @@ public class Enemy3 : MonoBehaviour
         healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
 
         colliding = false;
+        babysSpawned = false;
     }
 
     private void OnCollisionStay(Collision collision)
@@ -115,8 +124,18 @@ public class Enemy3 : MonoBehaviour
 
         if (healthPts <= 0)
         {
+            //instantiate baby spiders
+            GameObject babyObj = Instantiate(babySpider, babySpiderSpawn1) as GameObject;
+            GameObject babyObj2 = Instantiate(babySpider, babySpiderSpawn2) as GameObject;
+            GameObject babyObj3 = Instantiate(babySpider, babySpiderSpawn3) as GameObject;
+            GameObject babyObj4 = Instantiate(babySpider, babySpiderSpawn4) as GameObject;
             wavesControllerScript.spidersKilled++;
-            Destroy(gameObject);
+            babysSpawned = true;
+
+            if (babysSpawned == true)
+            {
+                Destroy(gameObject);
+            }
 
         }
 

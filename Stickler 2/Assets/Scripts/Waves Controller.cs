@@ -47,12 +47,12 @@ public class WavesController : MonoBehaviour
     void Update()
     {
         //waveNumber = enemySpawnerScript.ReturnWaveNum();
-
+        //usually type 1 
         if (waveNumber >= 0 && waveNumber <= 2)
         {
             spawnDelay = 5f;
             numberOfEnemies = 3;
-            enemyType = 1;
+            enemyType = 3;
         }
         
         if(waveNumber >= 3 && waveNumber <= 5)
