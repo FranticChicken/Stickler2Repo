@@ -268,4 +268,12 @@ public class Gun : MonoBehaviour
         return canShoot;
     }
 
+    public void RestoreAmmo(int x)
+    {
+        currentAmmo += x; 
+        if (currentAmmo > magSize)
+        {
+            currentAmmo = magSize;
+        }
+    }
 }

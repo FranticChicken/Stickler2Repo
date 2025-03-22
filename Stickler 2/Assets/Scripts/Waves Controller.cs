@@ -119,6 +119,19 @@ public class WavesController : MonoBehaviour
         }
 
     }
+
+    public bool WaveFinished()
+    {
+        //used to replenish health & ammo in player script
+        if (spidersKilled == numberOfEnemies)
+        {
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
+    }
 }
 
 [System.Serializable]

@@ -21,6 +21,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private float shotDistance = 1;
     [SerializeField] private Camera playerCamera;
 
+    //health and ammo amounts to be restored after each wave
+    [SerializeField] private int healthRestored;
+    [SerializeField] private int ammoRestored;
+
     [SerializeField] private ParticleSystem shootingSystem;
     [SerializeField] private ParticleSystem impactParticleSystem;
     [SerializeField] private TrailRenderer bulletTrail;
@@ -218,7 +222,17 @@ public class PlayerControls : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
             }
-            
+             
+            //replenished health and ammo
+            if (wavesControllerScript.WaveFinished())
+            {
+                currentHealth += healthRestored;
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+                equippedGun.RestoreAmmo(ammoRestored);
+            }
         }
 
         gunSounds.Play();
