@@ -52,21 +52,21 @@ public class WavesController : MonoBehaviour
         {
             spawnDelay = 5f;
             numberOfEnemies = 3;
-            enemyType = 3;
+            enemyType = 1;
         }
         
-        if(waveNumber >= 3 && waveNumber <= 5)
+        if(waveNumber == 3)
         {
             spawnDelay = 2f;
             numberOfEnemies = 6;
             enemyType = 2; 
         }
 
-        if(waveNumber >= 6 && waveNumber <= 8)
+        if(waveNumber >= 4 && waveNumber <= 8)
         {
             spawnDelay = 0.5f;
             numberOfEnemies = 9;
-            enemyType = 2;
+            enemyType = 3;
         }
 
         if(waveNumber >= 9 && waveNumber <= 11)
