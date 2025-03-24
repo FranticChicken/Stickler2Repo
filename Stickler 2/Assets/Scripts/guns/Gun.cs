@@ -188,8 +188,9 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
-                Destroy(hit.collider.gameObject);
-                wavesControllerScript.spidersKilled++;
+                hit.collider.gameObject.GetComponent<EnemyScript>().healthPts -= damage;
+                //Destroy(hit.collider.gameObject);
+                //wavesControllerScript.spidersKilled++;
                 //Debug.Log("enemy hit for real");
             }
             else if (hit.collider.gameObject.CompareTag("Enemy2"))

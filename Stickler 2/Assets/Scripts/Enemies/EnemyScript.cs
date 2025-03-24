@@ -30,6 +30,13 @@ public class EnemyScript : MonoBehaviour
     bool colliding;
 
 
+    //enemy health stuff
+    [HideInInspector]
+    public float healthPts;
+    float maxHealth;
+    WavesController wavesControllerScript;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +47,10 @@ public class EnemyScript : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
         colliding = false;
-        
+        wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
+        maxHealth = 1f;
+        healthPts = maxHealth;
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -102,7 +112,12 @@ public class EnemyScript : MonoBehaviour
         {
             transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
         }
-           
+
+        if(healthPts <= 0)
+        {
+            wavesControllerScript.spidersKilled++;
+            Destroy(gameObject);
+        }
        
         
         
