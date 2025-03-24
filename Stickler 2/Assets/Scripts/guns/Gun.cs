@@ -9,12 +9,13 @@ public class Gun : MonoBehaviour
     [SerializeField] protected int damage = 1;
     [SerializeField] protected int magSize = 10;    
     [SerializeField] protected int reserveAmmo = 20;
+    [SerializeField] protected int maxAmmoReserve = 100;
     [SerializeField] protected int bulletsPerShot = 1; //this mostly applies for the eventual shotgun, all other guns will have this set to 1
     protected int currentAmmo;
 
     [SerializeField] protected float fireRateRPM = 60; //measured in rounds per minute, RPM
     [SerializeField] protected float reloadTime = 1.5f; //measured in seconds
-    [SerializeField] protected float bloom;
+    [SerializeField] protected float bloom = 1;
     [SerializeField] protected float shotDistance = 50;
 
     [SerializeField] protected bool isAutomatic = false; 
@@ -30,6 +31,7 @@ public class Gun : MonoBehaviour
     protected float shotCooldown;
     protected WavesController wavesControllerScript;
     protected bool canShoot = true;
+    protected bool canReload = true;
     protected bool isReloading = false;
     protected bool isShooting = false;
     private bool hasAmmo = true;
@@ -66,6 +68,15 @@ public class Gun : MonoBehaviour
         else if (currentAmmo > 0)
         {
             hasAmmo = true;
+        }  
+
+        if (reserveAmmo > 0)
+        {
+            canReload = true;
+        } 
+        else
+        {
+            canReload = false;
         }
     }
 
@@ -141,12 +152,21 @@ public class Gun : MonoBehaviour
 
         audioSource.Play();
 
-        Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out trailHit, shotDistance);
-        enemyHit = Physics.Raycast(lookAtPoint.transform.position, lookAtPoint.forward, out hit, shotDistance, enemyLayer);
+        for (int i = 0; i < bulletsPerShot; i++)
+        {
+            float randomX = UnityEngine.Random.Range(-bloom / 4, bloom / 4);
+            float randomY = UnityEngine.Random.Range(-bloom / 4, bloom / 4);
+            Vector3 shootVector = lookAtPoint.forward + new Vector3(randomX, randomY, 0);
 
-        EnemyHit(enemyHit, hit);
+            Physics.Raycast(lookAtPoint.transform.position, shootVector, out trailHit, shotDistance);
+            enemyHit = Physics.Raycast(lookAtPoint.transform.position, shootVector, out hit, shotDistance, enemyLayer);
+
+            EnemyHit(enemyHit, hit);
+
+            StartCoroutine(SpawnTrail(trailHit));
+        }
+
         
-        StartCoroutine(SpawnTrail(trailHit)); 
 
         if (currentAmmo == 0 ) // magazine is empty
         {
@@ -207,7 +227,7 @@ public class Gun : MonoBehaviour
 
     public void BeginReload()
     {
-        if (currentAmmo < magSize && !isReloading)
+        if (currentAmmo < magSize && !isReloading && canReload)
         {      
             StartCoroutine(Reload());
         }
@@ -224,9 +244,29 @@ public class Gun : MonoBehaviour
 
         yield return new WaitForSeconds(reloadTime);       
 
-        int x = magSize - currentAmmo;
-        currentAmmo += x;
-        reserveAmmo -= x;
+        if (reserveAmmo >= magSize)
+        {
+            int x = magSize - currentAmmo;
+            currentAmmo += x;
+            reserveAmmo -= x;
+        } 
+        else if (currentAmmo < magSize)
+        {
+            int x = magSize - currentAmmo; 
+
+            if (reserveAmmo >= x)
+            {
+                currentAmmo += x;
+                reserveAmmo -= x;
+            } 
+            else
+            {
+                currentAmmo += reserveAmmo;
+                reserveAmmo = 0; 
+            }
+        }
+
+        
 
         UpdateAmmoText();
 
@@ -239,6 +279,7 @@ public class Gun : MonoBehaviour
         audioSource.clip = shootSFX;
 
         isReloading = false;
+
 
         yield return null;
     }
@@ -270,10 +311,12 @@ public class Gun : MonoBehaviour
 
     public void RestoreAmmo(int x)
     {
-        currentAmmo += x; 
-        if (currentAmmo > magSize)
+        reserveAmmo += x; 
+        if (reserveAmmo > maxAmmoReserve)
         {
-            currentAmmo = magSize;
+            reserveAmmo = maxAmmoReserve;
         }
+
+        UpdateAmmoText();
     }
 }

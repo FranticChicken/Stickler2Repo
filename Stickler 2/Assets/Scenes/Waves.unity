@@ -5926,8 +5926,8 @@ Transform:
   m_GameObject: {fileID: 346673366}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9.0279, y: 5.25, z: -18.25}
-  m_LocalScale: {x: 11.9436, y: 11.500299, z: 1}
+  m_LocalPosition: {x: 9.0497, y: 5.25, z: -18.25}
+  m_LocalScale: {x: 11.899408, y: 11.500299, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1800596747}
@@ -19631,8 +19631,8 @@ Transform:
   m_GameObject: {fileID: 1103989595}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 5.2499995, z: 6.375}
-  m_LocalScale: {x: 1, y: 11.5007305, z: 50}
+  m_LocalPosition: {x: 3.5, y: 5.2499995, z: 6.8111}
+  m_LocalScale: {x: 1, y: 11.5007305, z: 49.1274}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1800596747}
@@ -25908,8 +25908,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4350685482917032613, guid: aad46cd30ce44dd45a2729099b32cb16,
         type: 3}
+      propertyPath: bloom
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350685482917032613, guid: aad46cd30ce44dd45a2729099b32cb16,
+        type: 3}
       propertyPath: shotDistance
       value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350685482917032613, guid: aad46cd30ce44dd45a2729099b32cb16,
+        type: 3}
+      propertyPath: maxAmmoReserve
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4350685482917032613, guid: aad46cd30ce44dd45a2729099b32cb16,
         type: 3}
@@ -33739,6 +33749,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
         type: 3}
+      propertyPath: bloom
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
+        type: 3}
       propertyPath: shootSFX
       value: 
       objectReference: {fileID: 8300000, guid: 6f0a52664e43d8849b1a5aedfabaa2fb, type: 3}
@@ -33753,6 +33768,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5208404102319691556, guid: af9dcd75f69d9af48bbed436c637af95,
         type: 3}
+    - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
+        type: 3}
+      propertyPath: reserveAmmo
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
+        type: 3}
+      propertyPath: bulletsPerShot
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
+        type: 3}
+      propertyPath: maxAmmoReserve
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 5685026887404210760, guid: 75a23478be3205b4a980489df04b5d85,
         type: 3}
       propertyPath: bulletTrailOrigin
@@ -37418,6 +37448,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: ammoRestored
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 563116240}
@@ -37441,6 +37476,11 @@ PrefabInstance:
       propertyPath: gameOverScript
       value: 
       objectReference: {fileID: 1398901347}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
+      propertyPath: healthRestored
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
       propertyPath: dialogueManager

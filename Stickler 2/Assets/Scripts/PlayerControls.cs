@@ -167,9 +167,19 @@ public class PlayerControls : MonoBehaviour
                 
             }
 
-        } 
+        }
 
-       
+        //replenished health and ammo
+        if (wavesControllerScript.WaveFinished())
+        {
+            currentHealth += healthRestored;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            gun1.RestoreAmmo(ammoRestored);
+            gun2.RestoreAmmo(ammoRestored);
+        }
 
     }
 
@@ -223,16 +233,7 @@ public class PlayerControls : MonoBehaviour
                 hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
             }
              
-            //replenished health and ammo
-            if (wavesControllerScript.WaveFinished())
-            {
-                currentHealth += healthRestored;
-                if (currentHealth > maxHealth)
-                {
-                    currentHealth = maxHealth;
-                }
-                equippedGun.RestoreAmmo(ammoRestored);
-            }
+            
         }
 
         gunSounds.Play();
