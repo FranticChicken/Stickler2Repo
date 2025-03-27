@@ -232,8 +232,12 @@ public class PlayerControls : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= 1f;
             }
-             
-            
+            else if (hit.collider.gameObject.CompareTag("Baby Spider"))
+            {
+                hit.collider.gameObject.GetComponent<BabySpider>().healthPts -= 1f;
+            }
+
+
         }
 
         gunSounds.Play();

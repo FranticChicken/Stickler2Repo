@@ -13,6 +13,9 @@ TagManager:
   - Game Over
   - Enemy2
   - Enemy3
+  - Baby Spider
+  - Enemy Counter
+  - Enemy Spawner
   layers:
   - Default
   - TransparentFX

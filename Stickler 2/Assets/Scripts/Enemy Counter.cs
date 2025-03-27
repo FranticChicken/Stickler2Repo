@@ -8,7 +8,8 @@ public class EnemyCounter : MonoBehaviour
 {
     public TextMeshProUGUI enemyCounterText;
     WavesController wavesControllerScript;
-    int enemiesLeft;
+    [HideInInspector]
+    public int enemiesLeft;
 
     //Dialogue Manager Script
     public DialogueManager dialogueManager;
@@ -24,7 +25,7 @@ public class EnemyCounter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemiesLeft = wavesControllerScript.numberOfEnemies - wavesControllerScript.spidersKilled;
+        enemiesLeft = wavesControllerScript.numberOfEnemies + wavesControllerScript.numOfBabySpiders - wavesControllerScript.spidersKilled;
         enemyCounterText.text =  "Enemies Left = " + enemiesLeft.ToString();
 
         if (dialogueManager.dialogueOver == false || gameOverScript.playerDead == true)

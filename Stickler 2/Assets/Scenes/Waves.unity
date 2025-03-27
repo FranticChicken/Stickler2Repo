@@ -6565,7 +6565,7 @@ GameObject:
   - component: {fileID: 393482748}
   m_Layer: 0
   m_Name: Spawn Parent
-  m_TagString: Untagged
+  m_TagString: Enemy Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12108,7 +12108,7 @@ GameObject:
   - component: {fileID: 685009350}
   m_Layer: 5
   m_Name: Enemy Counter
-  m_TagString: Untagged
+  m_TagString: Enemy Counter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12146,6 +12146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCounterText: {fileID: 933139318}
+  enemiesLeft: 0
   dialogueManager: {fileID: 1182259766}
   gameOverScript: {fileID: 1398901347}
 --- !u!1 &690186480
@@ -29645,6 +29646,7 @@ MonoBehaviour:
   waveNumText2: {fileID: 1112151728}
   enemySpawnerScript: {fileID: 393482748}
   dialogueManager: {fileID: 1182259766}
+  numOfBabySpiders: 0
 --- !u!4 &1709622687
 Transform:
   m_ObjectHideFlags: 0

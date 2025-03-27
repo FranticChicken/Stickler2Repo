@@ -202,6 +202,10 @@ public class Gun : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<Enemy3>().healthPts -= damage;
             }
+            else if(hit.collider.gameObject.CompareTag("Baby Spider"))
+            {
+                hit.collider.gameObject.GetComponent<BabySpider>().healthPts -= damage;
+            }
 
         }
     }

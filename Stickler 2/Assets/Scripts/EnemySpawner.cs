@@ -53,7 +53,7 @@ public class EnemySpawner : MonoBehaviour
             spawnTimer = spawnDelay; // Reset the timer
         }
 
-        if(numOfEnemiesSpawned == waveControllerScript.numberOfEnemies && waveControllerScript.numberOfEnemies == waveControllerScript.spidersKilled)
+        if(numOfEnemiesSpawned == waveControllerScript.numberOfEnemies && (waveControllerScript.numberOfEnemies + waveControllerScript.numOfBabySpiders) == waveControllerScript.spidersKilled)
         {
             //waveNum++;
             numOfEnemiesSpawned = 0;

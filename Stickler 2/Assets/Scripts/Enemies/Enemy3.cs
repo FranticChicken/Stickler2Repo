@@ -42,6 +42,8 @@ public class Enemy3 : MonoBehaviour
     public Transform babySpiderSpawn4;
     public GameObject babySpider;
     bool babysSpawned;
+    
+    
 
     // Start is called before the first frame update
     void Start()
@@ -55,9 +57,11 @@ public class Enemy3 : MonoBehaviour
         maxHealth = 3f;
         healthPts = maxHealth;
         healthBar = transform.Find("Healthbar Canvas").transform.Find("Fill").GetComponent<Image>();
-
+        
         colliding = false;
         babysSpawned = false;
+
+        
     }
 
     private void OnCollisionStay(Collision collision)
@@ -122,14 +126,15 @@ public class Enemy3 : MonoBehaviour
             transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
         }
 
-        if (healthPts <= 0)
+        if (healthPts <= 0 && babysSpawned == false)
         {
             //instantiate baby spiders
-            GameObject babyObj = Instantiate(babySpider, babySpiderSpawn1) as GameObject;
-            GameObject babyObj2 = Instantiate(babySpider, babySpiderSpawn2) as GameObject;
-            GameObject babyObj3 = Instantiate(babySpider, babySpiderSpawn3) as GameObject;
-            GameObject babyObj4 = Instantiate(babySpider, babySpiderSpawn4) as GameObject;
+            GameObject babyObj = Instantiate(babySpider, babySpiderSpawn1.position, babySpiderSpawn1.transform.rotation) as GameObject;
+            GameObject babyObj2 = Instantiate(babySpider, babySpiderSpawn2.position, babySpiderSpawn2.transform.rotation) as GameObject;
+            GameObject babyObj3 = Instantiate(babySpider, babySpiderSpawn3.position, babySpiderSpawn3.transform.rotation) as GameObject;
+            GameObject babyObj4 = Instantiate(babySpider, babySpiderSpawn4.position, babySpiderSpawn4.transform.rotation) as GameObject;
             wavesControllerScript.spidersKilled++;
+            wavesControllerScript.numOfBabySpiders += 4;
             babysSpawned = true;
 
             if (babysSpawned == true)
@@ -140,6 +145,6 @@ public class Enemy3 : MonoBehaviour
         }
 
         healthBar.fillAmount = healthPts / maxHealth;
-        Debug.Log(healthPts);
+        //Debug.Log(healthPts);
     }
 }

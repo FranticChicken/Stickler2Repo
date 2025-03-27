@@ -17,12 +17,22 @@ public class BabySpider : MonoBehaviour
 
     bool colliding;
 
+    //baby spider health
+    public float healthPts;
+    float maxHealth;
+    WavesController wavesControllerScript;
+
     // Start is called before the first frame update
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
         playerControlsScript = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>();
+
+        wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
+        
+        maxHealth = 1;
+        healthPts = maxHealth;
 
         colliding = false;
     }
@@ -52,7 +62,13 @@ public class BabySpider : MonoBehaviour
         {
             agent.destination = target.position;
         }
-        
+
+        if (healthPts <= 0)
+        {
+            wavesControllerScript.numOfBabySpiders--;
+            Destroy(gameObject);
+
+        }
 
 
 

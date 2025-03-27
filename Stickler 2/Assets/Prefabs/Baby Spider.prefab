@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 6773208097604041870}
   m_Layer: 7
   m_Name: Baby Spider
-  m_TagString: Untagged
+  m_TagString: Baby Spider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,7 +521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9525a9113ffb2c649bd02e987afa1d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
 --- !u!1001 &2389713853955600916
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -33,6 +33,12 @@ public class WavesController : MonoBehaviour
     //Dialogue Manager Script
     public DialogueManager dialogueManager;
 
+    //Baby Spiders
+    [HideInInspector]
+    public int numOfBabySpiders;
+    [HideInInspector]
+    public bool allEnemiesKilled;
+
     
 
 
@@ -40,6 +46,8 @@ public class WavesController : MonoBehaviour
     void Start()
     {
         waveNumber = 1;
+        numOfBabySpiders = 0;
+        allEnemiesKilled = false;
         
     }
 
@@ -86,10 +94,11 @@ public class WavesController : MonoBehaviour
         waveNumText.text = "Wave " + waveNumber.ToString();
         waveNumText2.text = "Wave " + waveNumber.ToString();
 
-        if(spidersKilled == numberOfEnemies)
+        if(spidersKilled == numberOfEnemies + numOfBabySpiders)
         {
             waveNumber++;
             spidersKilled = 0;
+
             //Debug.Log("wave num should increase");
             StartCoroutine(NewWaveEffect());
         }
@@ -118,12 +127,13 @@ public class WavesController : MonoBehaviour
             
         }
 
+        
     }
 
     public bool WaveFinished()
     {
         //used to replenish health & ammo in player script
-        if (spidersKilled == numberOfEnemies)
+        if (spidersKilled == numberOfEnemies + numOfBabySpiders)
         {
             return true;
         } 
