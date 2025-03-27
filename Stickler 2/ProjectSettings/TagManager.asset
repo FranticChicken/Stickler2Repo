@@ -16,6 +16,7 @@ TagManager:
   - Baby Spider
   - Enemy Counter
   - Enemy Spawner
+  - Damage Image
   layers:
   - Default
   - TransparentFX

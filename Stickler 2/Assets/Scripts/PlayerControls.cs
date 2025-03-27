@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
@@ -91,6 +92,10 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] float stepHeight = 0.3f;
     [SerializeField] float stepSmooth = 2f;
 
+    //damage feedback
+    Image damageFeedbackImage;
+    float damageThreshold;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -110,6 +115,12 @@ public class PlayerControls : MonoBehaviour
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeight, stepRayUpper.transform.position.z);
 
         SwapGunInput.action.performed += SwapGun;
+
+        damageFeedbackImage = GameObject.FindGameObjectWithTag("Damage Image").GetComponent<Image>();
+        damageFeedbackImage.gameObject.SetActive(false);
+
+        //set damage threshold
+        damageThreshold = currentHealth;
     }
 
     // Update is called once per frame
@@ -141,6 +152,13 @@ public class PlayerControls : MonoBehaviour
         if(currentHealth <= 0)
         {
             gameOverScript.GameOver();
+        }
+
+        //check current health versus damage threshold to see if damage feedback image should appear
+        if(damageThreshold > currentHealth)
+        {
+            StartCoroutine(DamageFeedback());
+            damageThreshold = currentHealth;
         }
     }
 
@@ -179,6 +197,8 @@ public class PlayerControls : MonoBehaviour
             }
             gun1.RestoreAmmo(ammoRestored);
             gun2.RestoreAmmo(ammoRestored);
+
+            damageThreshold = currentHealth;
         }
 
     }
@@ -367,4 +387,19 @@ public class PlayerControls : MonoBehaviour
         }
         
     }
+
+    
+
+    IEnumerator DamageFeedback()
+    {
+        damageFeedbackImage.gameObject.SetActive(true);
+
+
+        yield return new WaitForSeconds(1);
+
+        damageFeedbackImage.gameObject.SetActive(false);
+
+    }
+
+
 }

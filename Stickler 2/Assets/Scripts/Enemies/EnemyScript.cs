@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class EnemyScript : MonoBehaviour
     PlayerControls playerControlsScript;
     float lastAttackTime;
     float attackCoolDown = 2f;
-
+    
     bool colliding;
 
 
@@ -50,6 +51,7 @@ public class EnemyScript : MonoBehaviour
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         maxHealth = 1f;
         healthPts = maxHealth;
+        
 
     }
 
@@ -63,10 +65,16 @@ public class EnemyScript : MonoBehaviour
         {
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
+            
         }
     }
 
-    private void OnCollisionExit(Collision collision)
+    
+
+
+    
+
+private void OnCollisionExit(Collision collision)
     {
         colliding = false;
     }
@@ -115,6 +123,7 @@ public class EnemyScript : MonoBehaviour
 
         if(healthPts <= 0)
         {
+
             wavesControllerScript.spidersKilled++;
             Destroy(gameObject);
         }
