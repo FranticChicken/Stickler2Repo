@@ -86,7 +86,7 @@ public class Enemy2 : MonoBehaviour
 
         bulletTime = timer;
 
-        Debug.Log("shoot player function is working");
+        //Debug.Log("shoot player function is working");
 
         GameObject bulletObj = Instantiate(projectile, projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
@@ -147,7 +147,7 @@ public class Enemy2 : MonoBehaviour
         }
 
         healthBar.fillAmount = healthPts /maxHealth;
-        Debug.Log(healthPts);
+        //Debug.Log(healthPts);
 
         ShootPlayer();
 

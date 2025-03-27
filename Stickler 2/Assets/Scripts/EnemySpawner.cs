@@ -69,7 +69,9 @@ public class EnemySpawner : MonoBehaviour
                 // Choose a random spawn point from the array
                 int randomIndex = Random.Range(0, spawnPoints.Length);
                 Transform spawnPoint = spawnPoints[randomIndex];
-
+                int randomEnemy123 = Random.Range(1, 4);
+                int randomEnemy12 = Random.Range(1, 3);
+              
                 if (waveControllerScript.enemyType == 1)
                 {
                     // Instantiate the enemy prefab at the chosen spawn point
@@ -85,7 +87,34 @@ public class EnemySpawner : MonoBehaviour
                     // Instantiate the enemy prefab at the chosen spawn point
                     Instantiate(Enemy3, spawnPoint.position, spawnPoint.rotation);
                 }
+                else if(waveControllerScript.enemyType == 12)
+                {
+                    if(randomEnemy12 == 1)
+                    {
+                        Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+                    }
+                    else if(randomEnemy12 == 2)
+                    {
+                        Instantiate(Enemy2, spawnPoint.position, spawnPoint.rotation);
+                    }
+                }
+                else if(waveControllerScript.enemyType == 123)
+                {
+                    if (randomEnemy123 == 1)
+                    {
+                        Instantiate(Enemy, spawnPoint.position, spawnPoint.rotation);
+                    }
+                    else if (randomEnemy123 == 2)
+                    {
+                        Instantiate(Enemy2, spawnPoint.position, spawnPoint.rotation);
+                    }
+                    else if (randomEnemy123 == 3)
+                    {
+                        Instantiate(Enemy3, spawnPoint.position, spawnPoint.rotation);
+                    }
+                }
 
+                
 
 
                 //count every time an enemy is spawned

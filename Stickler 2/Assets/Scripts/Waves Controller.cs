@@ -53,9 +53,7 @@ public class WavesController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        //waveNumber = enemySpawnerScript.ReturnWaveNum();
-        //usually type 1 
+    { 
         if (waveNumber >= 0 && waveNumber <= 2)
         {
             spawnDelay = 5f;
@@ -66,29 +64,36 @@ public class WavesController : MonoBehaviour
         if(waveNumber == 3)
         {
             spawnDelay = 2f;
-            numberOfEnemies = 6;
+            numberOfEnemies = 3;
             enemyType = 2; 
         }
 
-        if(waveNumber >= 4 && waveNumber <= 8)
+        if(waveNumber >= 4 && waveNumber <= 5)
         {
             spawnDelay = 0.5f;
-            numberOfEnemies = 9;
+            numberOfEnemies = 3;
             enemyType = 3;
+        }
+
+        if(waveNumber >= 6 && waveNumber <= 8)
+        {
+            spawnDelay = 0.5f;
+            numberOfEnemies = 6;
+            enemyType = 12;
         }
 
         if(waveNumber >= 9 && waveNumber <= 11)
         {
             spawnDelay = 0.5f;
-            numberOfEnemies = 12;
-            enemyType = 3;
+            numberOfEnemies = 6;
+            enemyType = 123;
         }
 
         if(waveNumber >= 12)
         {
             spawnDelay = 0.5f;
-            numberOfEnemies = 15;
-            enemyType = 3;
+            numberOfEnemies = 12;
+            enemyType = 123;
         }
 
         waveNumText.text = "Wave " + waveNumber.ToString();
