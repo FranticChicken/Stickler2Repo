@@ -37,6 +37,14 @@ public class EnemyScript : MonoBehaviour
     float maxHealth;
     WavesController wavesControllerScript;
 
+    //audio stuff
+    public AudioClip attackSFX;
+    public AudioClip deathSFX;
+    AudioSource spiderAudioSource;
+    AudioSource playerAudioSource;
+    [HideInInspector]
+    public bool makeDeathSound = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,7 +59,8 @@ public class EnemyScript : MonoBehaviour
         wavesControllerScript = GameObject.FindGameObjectWithTag("waves").GetComponent<WavesController>();
         maxHealth = 1f;
         healthPts = maxHealth;
-        
+        spiderAudioSource = GetComponent<AudioSource>();
+        playerAudioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
 
     }
 
@@ -65,7 +74,8 @@ public class EnemyScript : MonoBehaviour
         {
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
-            
+            spiderAudioSource.clip = attackSFX;
+            spiderAudioSource.Play();
         }
     }
 
@@ -109,6 +119,16 @@ private void OnCollisionExit(Collision collision)
         }
     }
 
+    private IEnumerator DeathSound()
+    {
+
+        yield return new WaitForSeconds(1);
+
+        
+
+        yield return null;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -123,8 +143,13 @@ private void OnCollisionExit(Collision collision)
 
         if(healthPts <= 0)
         {
-
+            //spiderAudioSource.clip = deathSFX;
+            //spiderAudioSource.Play();
             wavesControllerScript.spidersKilled++;
+            //StartCoroutine(DeathSound());
+            //playerAudioSource.clip = deathSFX;
+            //playerAudioSource.Play();
+            //playerControlsScript.makeDeathNoise = true;
             Destroy(gameObject);
         }
        

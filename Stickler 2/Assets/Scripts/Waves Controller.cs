@@ -58,7 +58,7 @@ public class WavesController : MonoBehaviour
         {
             spawnDelay = 5f;
             numberOfEnemies = 3;
-            enemyType = 1;
+            enemyType = 2;
         }
         
         if(waveNumber == 3)

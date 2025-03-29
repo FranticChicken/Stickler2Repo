@@ -42,6 +42,11 @@ public class Enemy2 : MonoBehaviour
 
     bool colliding;
 
+    //Audio Stuff
+    public AudioClip attackSFX;
+    public AudioClip attack2SFX;
+    AudioSource spiderAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +61,8 @@ public class Enemy2 : MonoBehaviour
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         agent = GetComponent<NavMeshAgent>();
 
+        spiderAudioSource = GetComponent<AudioSource>();
+
         colliding = false;
         
     }
@@ -69,6 +76,8 @@ public class Enemy2 : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerControlsScript.currentHealth -= 25f;
+            spiderAudioSource.clip = attackSFX;
+            spiderAudioSource.Play();
             lastAttackTime = Time.time;
         }
     }
@@ -80,7 +89,7 @@ public class Enemy2 : MonoBehaviour
 
     void ShootPlayer()
     {
-        bulletTime -= Time.deltaTime;
+        
 
         if (bulletTime > 0) return;
 
@@ -91,6 +100,8 @@ public class Enemy2 : MonoBehaviour
         GameObject bulletObj = Instantiate(projectile, projectileSpawnPoint.transform.position, projectileSpawnPoint.transform.rotation) as GameObject;
         Rigidbody bulletRig = bulletObj.GetComponent<Rigidbody>();
         bulletRig.AddForce(bulletRig.transform.forward * projectileSpeed);
+        spiderAudioSource.clip = attack2SFX;
+        spiderAudioSource.Play();
 
     }
 
@@ -149,7 +160,14 @@ public class Enemy2 : MonoBehaviour
         healthBar.fillAmount = healthPts /maxHealth;
         //Debug.Log(healthPts);
 
-        ShootPlayer();
+        var distance = Vector3.Distance(target.position, transform.position);
+        bulletTime -= Time.deltaTime;
+
+        if (distance <= 15)
+        {
+            ShootPlayer();
+        }
+
 
     }
 }

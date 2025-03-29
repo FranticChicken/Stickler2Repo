@@ -42,8 +42,10 @@ public class Enemy3 : MonoBehaviour
     public Transform babySpiderSpawn4;
     public GameObject babySpider;
     bool babysSpawned;
-    
-    
+
+    //Audio Stuff
+    public AudioClip attackSFX;
+    AudioSource spiderAudioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +63,8 @@ public class Enemy3 : MonoBehaviour
         colliding = false;
         babysSpawned = false;
 
-        
+        spiderAudioSource = GetComponent<AudioSource>();
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -73,6 +76,8 @@ public class Enemy3 : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             playerControlsScript.currentHealth -= 25f;
+            spiderAudioSource.clip = attackSFX;
+            spiderAudioSource.Play();
             lastAttackTime = Time.time;
         }
     }

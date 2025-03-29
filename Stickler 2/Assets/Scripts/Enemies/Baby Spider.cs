@@ -22,6 +22,10 @@ public class BabySpider : MonoBehaviour
     float maxHealth;
     WavesController wavesControllerScript;
 
+    //Audio Stuff
+    public AudioClip attackSFX;
+    AudioSource spiderAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,8 @@ public class BabySpider : MonoBehaviour
         healthPts = maxHealth;
 
         colliding = false;
+
+        spiderAudioSource = GetComponent<AudioSource>();
     }
 
     private void OnCollisionStay(Collision collision)
@@ -47,6 +53,9 @@ public class BabySpider : MonoBehaviour
         {
             playerControlsScript.currentHealth -= 25f;
             lastAttackTime = Time.time;
+
+            spiderAudioSource.clip = attackSFX;
+            spiderAudioSource.Play();
         }
     }
 

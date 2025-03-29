@@ -521,6 +521,8 @@ MonoBehaviour:
     type: 3}
   projectileSpawnPoint: {fileID: 2699754277415788627}
   healthPts: 3
+  attackSFX: {fileID: 8300000, guid: 05fe94af5eb764853aeb3c1db9d36452, type: 3}
+  attack2SFX: {fileID: 8300000, guid: 78f9f711824e54c6291fc9cbb12a535d, type: 3}
 --- !u!195 &8922548323987251309
 NavMeshAgent:
   m_ObjectHideFlags: 0

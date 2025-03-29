@@ -96,6 +96,12 @@ public class PlayerControls : MonoBehaviour
     Image damageFeedbackImage;
     float damageThreshold;
 
+    //audio stuff
+    [HideInInspector]
+    public bool makeDeathNoise = false;
+    AudioSource audioSource;
+    public AudioClip deathSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -121,6 +127,9 @@ public class PlayerControls : MonoBehaviour
 
         //set damage threshold
         damageThreshold = currentHealth;
+
+        //audiosource
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -160,6 +169,27 @@ public class PlayerControls : MonoBehaviour
             StartCoroutine(DamageFeedback());
             damageThreshold = currentHealth;
         }
+
+        //audio
+        /*
+        if(makeDeathNoise == true)
+        {
+            StartCoroutine(DeathSound());
+            makeDeathNoise = false;
+        }
+        */
+    }
+
+    private IEnumerator DeathSound()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+
+        audioSource.clip = deathSFX;
+        audioSource.Play();
+
+
+        yield return null;
     }
 
     void OnMove(InputValue movementValue)

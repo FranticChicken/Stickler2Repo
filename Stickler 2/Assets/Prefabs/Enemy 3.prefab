@@ -497,6 +497,7 @@ MonoBehaviour:
   babySpiderSpawn4: {fileID: 8800749586564045134}
   babySpider: {fileID: 8133473053186417987, guid: 11996b70910f16747bd7eba9cfbf24d9,
     type: 3}
+  attackSFX: {fileID: 8300000, guid: 05fe94af5eb764853aeb3c1db9d36452, type: 3}
 --- !u!54 &-2521823900087615336
 Rigidbody:
   m_ObjectHideFlags: 0
