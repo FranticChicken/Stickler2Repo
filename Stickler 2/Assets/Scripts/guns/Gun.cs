@@ -20,12 +20,13 @@ public class Gun : MonoBehaviour
 
     [SerializeField] protected bool isAutomatic = false; 
 
-    [SerializeField] protected Animator gunAnimator;
+    
     [SerializeField] private AudioClip shootSFX;
     [SerializeField] private AudioClip reloadSFX;
     [SerializeField] protected TrailRenderer bulletTrail;
     [SerializeField] protected Transform bulletTrailOrigin;
 
+    protected Animator gunAnimator;
     protected Transform lookAtPoint;
     protected LayerMask enemyLayer;
     protected float shotCooldown;
@@ -50,6 +51,11 @@ public class Gun : MonoBehaviour
         
         enemyLayer = playerScript.enemyLayer;
 
+        if(GetComponent<Animator>() != null)
+        {
+            gunAnimator = GetComponent<Animator>();
+        }
+        
         currentAmmo = magSize;
         shotCooldown = 60 / fireRateRPM; //this will be measured in seconds, ie 60 rpm = 1 second shot cooldown 
 
@@ -136,6 +142,8 @@ public class Gun : MonoBehaviour
 
     public void Shoot()
     {
+        gunAnimator.SetTrigger("Shoot");
+
         //declare necessary variables 
         bool enemyHit = false; 
         
@@ -240,6 +248,8 @@ public class Gun : MonoBehaviour
 
     private IEnumerator Reload()
     {
+        gunAnimator.SetTrigger("Reload");
+
         audioSource.Stop();
         canShoot = false;
         isReloading = true;
