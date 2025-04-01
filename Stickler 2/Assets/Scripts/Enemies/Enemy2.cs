@@ -47,6 +47,9 @@ public class Enemy2 : MonoBehaviour
     public AudioClip attack2SFX;
     AudioSource spiderAudioSource;
 
+    //navmesh stuff
+    public float maxDistance = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -139,6 +142,7 @@ public class Enemy2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (!IsOnWall() && colliding == false)
         {
             //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
@@ -149,8 +153,20 @@ public class Enemy2 : MonoBehaviour
         {
             transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
         }
+        */
 
-        if(healthPts <= 0)
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(target.position, out hit, maxDistance, NavMesh.AllAreas) && colliding == false)
+        {
+            // 'hit.position' now contains the nearest point on the NavMesh
+            agent.destination = hit.position;
+        }
+        else
+        {
+            Debug.Log("No NavMesh point found within range.");
+        }
+
+        if (healthPts <= 0)
         {
             wavesControllerScript.spidersKilled++;
             Destroy(gameObject);

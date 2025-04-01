@@ -26,6 +26,9 @@ public class BabySpider : MonoBehaviour
     public AudioClip attackSFX;
     AudioSource spiderAudioSource;
 
+    //navmesh stuff
+    public float maxDistance = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,10 +70,24 @@ public class BabySpider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (colliding == false)
         {
             agent.destination = target.position;
         }
+        */
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(target.position, out hit, maxDistance, NavMesh.AllAreas) && colliding == false)
+        {
+            // 'hit.position' now contains the nearest point on the NavMesh
+            agent.destination = hit.position;
+        }
+        else
+        {
+            Debug.Log("No NavMesh point found within range.");
+        }
+
 
         if (healthPts <= 0)
         {
@@ -78,6 +95,7 @@ public class BabySpider : MonoBehaviour
             Destroy(gameObject);
 
         }
+
 
 
 

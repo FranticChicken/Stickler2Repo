@@ -45,6 +45,8 @@ public class EnemyScript : MonoBehaviour
     [HideInInspector]
     public bool makeDeathSound = false;
 
+    //navmesh stuff
+    public float maxDistance = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -132,6 +134,7 @@ private void OnCollisionExit(Collision collision)
     // Update is called once per frame
     void Update()
     {
+        /*
         if (!IsOnWall() && colliding == false)
         {
             agent.destination = target.position;
@@ -140,8 +143,20 @@ private void OnCollisionExit(Collision collision)
         {
             transform.position += new Vector3(0, -0.5f * speed * Time.deltaTime, 0);
         }
+        */
 
-        if(healthPts <= 0)
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(target.position, out hit, maxDistance, NavMesh.AllAreas) && colliding == false)
+        {
+            // 'hit.position' now contains the nearest point on the NavMesh
+            agent.destination = hit.position;
+        }
+        else
+        {
+            Debug.Log("No NavMesh point found within range.");
+        }
+
+        if (healthPts <= 0)
         {
             //spiderAudioSource.clip = deathSFX;
             //spiderAudioSource.Play();
