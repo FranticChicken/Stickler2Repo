@@ -28584,11 +28584,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: be1c0014add0445a19dd3075331588f8, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.114
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -39305,6 +39305,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 518746101}
     m_Modifications:
+    - target: {fileID: 1476682367263008342, guid: ba42cafbcca2ca44e8aeb120582a60e7,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1937016156882024096, guid: ba42cafbcca2ca44e8aeb120582a60e7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
