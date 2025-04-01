@@ -362,7 +362,10 @@ public class PlayerControls : MonoBehaviour
             RaycastHit hitUpper;
             if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                if (hitLower.transform.gameObject.name == "Stairs" || hitLower.transform.gameObject.name == "Stairs (1)")
+                {
+                    rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                }
             }
         }
 
@@ -373,7 +376,10 @@ public class PlayerControls : MonoBehaviour
             RaycastHit hitUpper45;
             if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                if (hitLower45.transform.gameObject.name == "Stairs" || hitLower45.transform.gameObject.name == "Stairs (1)")
+                {
+                    rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                }
             }
         }
 
@@ -384,7 +390,10 @@ public class PlayerControls : MonoBehaviour
             RaycastHit hitUpperMinus45;
             if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                if (hitLowerMinus45.transform.gameObject.name == "Stairs" || hitLowerMinus45.transform.gameObject.name == "Stairs (1)")
+                {
+                    rb.position -= new Vector3(0f, -stepSmooth * Time.deltaTime, 0f);
+                }
             }
         }
     }
