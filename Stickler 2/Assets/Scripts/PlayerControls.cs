@@ -31,9 +31,9 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private TrailRenderer bulletTrail;
 
     [SerializeField] private GameObject bulletSpawnPoint;
-    [SerializeField] private Gun gun1;
-    [SerializeField] private Gun gun2;
-    private Gun equippedGun;
+    [SerializeField] public Gun gun1;
+    [SerializeField] public Gun gun2;
+    [HideInInspector] public Gun equippedGun;
     private int currentAmmo;
     [SerializeField] private AmmoDisplay ammoDisplay;
 
@@ -104,7 +104,9 @@ public class PlayerControls : MonoBehaviour
 
     //gunSelector variables
     [SerializeField] GunSelect gunSelector;
+    [SerializeField] JumpingSpider jumpingSpider;
     [SerializeField] LayerMask gunSelectorLayer;
+    [SerializeField] LayerMask jumpingSpiderLayer;
     public Gun assaultRifle;
     public Gun smg;
     public Gun shotgun;
@@ -439,12 +441,16 @@ public class PlayerControls : MonoBehaviour
 
     void OnSelectGun(InputValue selectGunValue)
     {
-        Debug.Log("gun select start");
-        if(Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 50f, gunSelectorLayer))
+        //now being used for both select gun and interact with jumping spider
+        if(Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 5f, gunSelectorLayer))
         {
-            Debug.Log("raycast succsess");
             gunSelector.SelectGun(gunSelectHit);
-        } 
+        }  
+        else if (Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 5f, jumpingSpiderLayer))
+        {
+            Debug.Log("0-0");
+            jumpingSpider.Interact();
+        }
     }
     
     public void SetGunOne(Gun gun)
@@ -456,7 +462,18 @@ public class PlayerControls : MonoBehaviour
     {
         gun2 = gun;
     }
+    
+    public void SetNewActiveGun(Gun gun)
+    {
+        equippedGun.gameObject.SetActive(false);
 
+        equippedGun = gun; 
+        equippedGun.gameObject.SetActive(true);
+        SetCurrentAmmo(equippedGun.GetAmmo(), equippedGun.GetReserveAmmo());
+
+        equippedGun.SetIsReloading(false);
+
+    }
 
     IEnumerator DamageFeedback()
     {

@@ -31,22 +31,44 @@ public class GunSelect : MonoBehaviour
 
         if (hit.collider == assaultRifle)
         {
+            if (player.equippedGun == player.gun1)
+            {
+                player.SetNewActiveGun(player.assaultRifle);
+            }
             player.SetGunOne(player.assaultRifle);
+
+            
         } 
         else if (hit.collider == shotgun)
         {
+            if (player.equippedGun == player.gun1)
+            {
+                player.SetNewActiveGun(player.shotgun);
+            }
             player.SetGunOne(player.shotgun);
         }
         else if (hit.collider == smg)
         {
+            if (player.equippedGun == player.gun1)
+            {
+                player.SetNewActiveGun(player.smg);
+            }
             player.SetGunOne(player.smg);
         }
         else if (hit.collider == deagle)
         {
+            if (player.equippedGun == player.gun2)
+            {
+                player.SetNewActiveGun(player.deagle);
+            }
             player.SetGunTwo(player.deagle);
         }
         else if (hit.collider == glock)
         {
+            if (player.equippedGun == player.gun2)
+            {
+                player.SetNewActiveGun(player.glock);
+            }
             player.SetGunTwo(player.glock);
         }
     }
