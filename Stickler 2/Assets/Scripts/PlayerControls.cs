@@ -102,6 +102,16 @@ public class PlayerControls : MonoBehaviour
     AudioSource audioSource;
     public AudioClip deathSFX;
 
+    //gunSelector variables
+    [SerializeField] GunSelect gunSelector;
+    [SerializeField] LayerMask gunSelectorLayer;
+    public Gun assaultRifle;
+    public Gun smg;
+    public Gun shotgun;
+    public Gun deagle;
+    public Gun glock;
+    RaycastHit gunSelectHit;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -402,7 +412,7 @@ public class PlayerControls : MonoBehaviour
     {
         
         if(equippedGun == gun1 && gun1.GetCanShoot())
-        {
+        { // switch to secondary gun
             equippedGun = gun2;
 
             gun1.gameObject.SetActive(false); 
@@ -414,7 +424,7 @@ public class PlayerControls : MonoBehaviour
 
         }
         else if(equippedGun == gun2 && gun2.GetCanShoot())
-        {
+        { // switch to primary gun
             equippedGun = gun1;
 
             gun1.gameObject.SetActive(true);
@@ -427,7 +437,26 @@ public class PlayerControls : MonoBehaviour
         
     }
 
+    void OnSelectGun(InputValue selectGunValue)
+    {
+        Debug.Log("gun select start");
+        if(Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 50f, gunSelectorLayer))
+        {
+            Debug.Log("raycast succsess");
+            gunSelector.SelectGun(gunSelectHit);
+        } 
+    }
     
+    public void SetGunOne(Gun gun)
+    {
+        gun1 = gun;
+    } 
+
+    public void SetGunTwo(Gun gun)
+    {
+        gun2 = gun;
+    }
+
 
     IEnumerator DamageFeedback()
     {
