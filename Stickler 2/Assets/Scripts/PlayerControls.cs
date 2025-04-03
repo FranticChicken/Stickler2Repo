@@ -107,12 +107,17 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] JumpingSpider jumpingSpider;
     [SerializeField] LayerMask gunSelectorLayer;
     [SerializeField] LayerMask jumpingSpiderLayer;
+    [SerializeField] LayerMask doorwayLayer;
     public Gun assaultRifle;
     public Gun smg;
     public Gun shotgun;
     public Gun deagle;
     public Gun glock;
     RaycastHit gunSelectHit;
+
+    //stuff for starting real gameplay
+    public Transform newSpawn;
+    public EnemySpawner enemySpawnerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -441,7 +446,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnSelectGun(InputValue selectGunValue)
     {
-        //now being used for both select gun and interact with jumping spider
+        //now being used for both select gun and interact with jumping spider and doorway
         if(Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 5f, gunSelectorLayer))
         {
             gunSelector.SelectGun(gunSelectHit);
@@ -450,6 +455,13 @@ public class PlayerControls : MonoBehaviour
         {
             Debug.Log("0-0");
             jumpingSpider.Interact();
+        }
+        else if (Physics.Raycast(transform.position, lookAtPoint.forward, out gunSelectHit, 5f, doorwayLayer))
+        {
+            //startGame bool == true
+            enemySpawnerScript.gameStarted = true;
+            //teleport player to outside hallway
+            transform.position = newSpawn.position;
         }
     }
     

@@ -6716,6 +6716,7 @@ MonoBehaviour:
   enemiesPerSpawn: 1
   waveControllerScript: {fileID: 1709622686}
   dialogueManager: {fileID: 1182259766}
+  gameStarted: 0
 --- !u!4 &393482749
 Transform:
   m_ObjectHideFlags: 0
@@ -25507,6 +25508,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 45338184}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1436959491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1436959492}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1436959492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436959491}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.599998, y: 2.97, z: 5.3700027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1829222615}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1439504677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25519,6 +25551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Door (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758594196759466185, guid: 61a97069ec7e7f944b6b742bead00255,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1758594196759466185, guid: 61a97069ec7e7f944b6b742bead00255,
         type: 3}
@@ -32742,6 +32779,7 @@ Transform:
   - {fileID: 1918399725}
   - {fileID: 1786004872}
   - {fileID: 293688770}
+  - {fileID: 1436959492}
   m_Father: {fileID: 17489755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1834401306
@@ -39982,6 +40020,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 41bd7320c46efb24ca2b26e9fe4de1b5, type: 3}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: newSpawn
+      value: 
+      objectReference: {fileID: 1436959492}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: stepHeight
       value: 1
       objectReference: {fileID: 0}
@@ -40101,6 +40144,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
+      propertyPath: enemySpawnerScript
+      value: 
+      objectReference: {fileID: 393482748}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
+      propertyPath: doorwayLayer.m_Bits
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}

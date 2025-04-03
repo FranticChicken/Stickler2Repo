@@ -27,6 +27,10 @@ public class EnemySpawner : MonoBehaviour
     //dialogue Controller stuff
     public DialogueManager dialogueManager;
 
+    //game start
+    [HideInInspector]
+    public bool gameStarted;
+
     private void Awake()
     {
         numOfEnemiesSpawned = 0;
@@ -36,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // Start the timer
         spawnTimer = spawnDelay;
+        gameStarted = false;
     }
 
     void Update()
@@ -47,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         spawnTimer -= Time.deltaTime;
 
         // When the timer hits zero, spawn enemies
-        if (spawnTimer <= 0)
+        if (spawnTimer <= 0 && gameStarted == true)
         {
             SpawnEnemies();
             spawnTimer = spawnDelay; // Reset the timer
