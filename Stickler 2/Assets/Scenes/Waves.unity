@@ -6701,9 +6701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6594760571aa3c143b1f99086989508f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 3705860560389701985, guid: 9dbf29dcc12a619408eff86467f5f978, type: 3}
-  Enemy2: {fileID: 6923558930049319143, guid: e24dceff4599347059e5f6329b6566b3, type: 3}
-  Enemy3: {fileID: 8133473053186417987, guid: 235f11e00b7714874825fe11bf3afa69, type: 3}
+  Enemy: {fileID: 7498802056641417860, guid: 12756299adfb26940a379ca3604dd860, type: 3}
+  Enemy2: {fileID: 8162044764738412646, guid: b1bbcffecfc580a498e1b81a4c7cf5b7, type: 3}
+  Enemy3: {fileID: 3276202476399681176, guid: 1a3c8f06edbcf784cbc4a82de1b72702, type: 3}
   spawnPoints:
   - {fileID: 1007481631}
   - {fileID: 1303290191}

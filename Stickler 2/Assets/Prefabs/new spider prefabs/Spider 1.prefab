@@ -1567,9 +1567,9 @@ Transform:
   m_GameObject: {fileID: 5832065915300688942}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -0.009953822, y: 0, z: 7.514927e-10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.144, y: 0, z: 0}
+  m_LocalScale: {x: 14.25, y: 14.249998, z: 14.249998}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1683466487863559268}
   - {fileID: 5326741916845583481}
@@ -2005,9 +2005,9 @@ Transform:
   m_GameObject: {fileID: 7353287629907216689}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: -0.009953822, y: 0, z: 7.514927e-10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.144, y: 0, z: 0}
+  m_LocalScale: {x: 14.25, y: 14.249998, z: 14.249998}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 439210369135994751}
   m_Father: {fileID: 6476693789371408189}
@@ -2209,8 +2209,8 @@ Transform:
   m_GameObject: {fileID: 7498802056641417860}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0000011175871, y: -0.000001013279, z: 0.7071069, w: -0.70710677}
-  m_LocalPosition: {x: -39.80204, y: 0, z: 38.582832}
-  m_LocalScale: {x: 23.6, y: 23.6, z: 23.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 751885195464867008}
@@ -2271,7 +2271,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7498802056641417860}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2280,8 +2280,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
+  m_Height: 0.4
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!82 &6624188644885886634
@@ -2304,7 +2304,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.35956168
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -2399,10 +2399,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.0125436615
-  m_Height: 0.04802353
+  m_Radius: 0.24854487
+  m_Height: 0.6540278
   m_Direction: 2
-  m_Center: {x: -0.01395883, y: 0.00014615263, z: 0.00286146}
+  m_Center: {x: -0.16233873, y: 0.024519913, z: 0.04507774}
 --- !u!54 &5972326064793970233
 Rigidbody:
   m_ObjectHideFlags: 0
