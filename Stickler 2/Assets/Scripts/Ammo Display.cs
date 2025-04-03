@@ -11,6 +11,7 @@ public class AmmoDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI reserveAmmoText;
     [SerializeField] private Image ammoImage;
     [SerializeField] private DialogueManager dialogueManagerScript;
+    public SpiderDialogueManager spiderDManager;
     [SerializeField] private GameOverUI gameOverScript;
     [SerializeField] private PauseMenuUI pauseMenuScript;
 
@@ -26,7 +27,7 @@ public class AmmoDisplay : MonoBehaviour
 
     private void Update()
     {
-        if (dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true)
+        if (dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true || spiderDManager.dialogueOver == false)
         {
             ammoImage.gameObject.SetActive(false);
         }

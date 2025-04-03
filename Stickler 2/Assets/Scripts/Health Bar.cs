@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     public PauseMenuUI pauseMenuScript;
     public GameOverUI gameOverScript;
     public DialogueManager dialogueManagerScript;
+    public SpiderDialogueManager spiderDManager;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         //if game is paused, player is dead, or dialogue is playing, don't show the health bar
-        if(dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true)
+        if (dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true || spiderDManager.dialogueOver == false)
         {
             healthBar.gameObject.SetActive(false);
         }

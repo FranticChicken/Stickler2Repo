@@ -60,6 +60,7 @@ public class PlayerControls : MonoBehaviour
 
     //dialogue manager stuff
     public DialogueManager dialogueManager;
+    public SpiderDialogueManager spiderDManager;
 
     //health stuff
     float maxHealth = 100;
@@ -152,7 +153,7 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
+        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && spiderDManager.dialogueOver == true)
         {
             //transform.position += transform.rotation * (speed * Time.deltaTime * movementVector);
             Vector3 forwardDirection = transform.forward.normalized;
@@ -216,7 +217,7 @@ public class PlayerControls : MonoBehaviour
 
     void OnShoot(InputValue shootValue)
     {
-        if(dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
+        if(dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && spiderDManager.dialogueOver == true)
         {
 
             //ImprovedShooting();
@@ -349,7 +350,7 @@ public class PlayerControls : MonoBehaviour
     }
     void OnLook(InputValue lookValue)
     {
-        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false)
+        if (dialogueManager.dialogueOver == true && pauseMenuScript.gamePaused == false && gameOverScript.playerDead == false && spiderDManager.dialogueOver == true)
         {
             //controls rotation angles
             currentRotation.x += lookValue.Get<Vector2>().x * Time.deltaTime * mouseSensX;

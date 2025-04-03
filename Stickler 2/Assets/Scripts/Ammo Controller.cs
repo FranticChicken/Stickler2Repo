@@ -18,6 +18,7 @@ public class AmmoController : MonoBehaviour
     public DialogueManager dialogueManagerScript;
     public GameOverUI gameOverScript;
     public PauseMenuUI pauseMenuScript;
+    public SpiderDialogueManager spiderDManager; 
 
     //bool that lets game know if reload delay has played through or not and player can get their full amount of bullets
     bool reloadReady;
@@ -82,7 +83,7 @@ public class AmmoController : MonoBehaviour
             hasAmmo = true;
         }
 
-        if (dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true)
+        if (dialogueManagerScript.dialogueOver == false || gameOverScript.playerDead == true || pauseMenuScript.gamePaused == true || spiderDManager.dialogueOver == false)
         {
             ammoImage.gameObject.SetActive(false);
         }

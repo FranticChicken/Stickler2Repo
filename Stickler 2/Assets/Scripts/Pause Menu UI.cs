@@ -28,6 +28,7 @@ public class PauseMenuUI : MonoBehaviour
     public TextMeshProUGUI mouseSenseText;
 
     public DialogueManager dialogueManager;
+    public SpiderDialogueManager spiderDManager;
 
     public GameObject crossHair;
 
@@ -46,7 +47,7 @@ public class PauseMenuUI : MonoBehaviour
     void TogglePauseMenu(InputAction.CallbackContext context)
     {
         //Debug.Log("works here");
-        if (gameOverScript.playerDead == false && dialogueManager.dialogueOver == true)
+        if (gameOverScript.playerDead == false && dialogueManager.dialogueOver == true && spiderDManager.dialogueOver == true)
         {
             gamePaused = !gamePaused;
             //Debug.Log("also works here");
@@ -84,11 +85,11 @@ public class PauseMenuUI : MonoBehaviour
             Cursor.visible = true;
             crossHair.gameObject.SetActive(false);
         }
-        else if(dialogueManager.dialogueOver == false)
+        else if(dialogueManager.dialogueOver == false && spiderDManager.dialogueOver == false)
         {
             crossHair.gameObject.SetActive(false);
         }
-        else if (!gamePaused && gameOverScript.playerDead == false && dialogueManager.dialogueOver == true)
+        else if (!gamePaused && gameOverScript.playerDead == false && dialogueManager.dialogueOver == true && spiderDManager.dialogueOver == true)
         {
             Time.timeScale = 1;
             pauseMenu.SetActive(false);

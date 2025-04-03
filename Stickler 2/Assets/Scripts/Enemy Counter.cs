@@ -13,6 +13,7 @@ public class EnemyCounter : MonoBehaviour
 
     //Dialogue Manager Script
     public DialogueManager dialogueManager;
+    public SpiderDialogueManager spiderDManager;
 
     public GameOverUI gameOverScript;
 
@@ -28,7 +29,7 @@ public class EnemyCounter : MonoBehaviour
         enemiesLeft = wavesControllerScript.numberOfEnemies + wavesControllerScript.numOfBabySpiders - wavesControllerScript.spidersKilled;
         enemyCounterText.text =  "Enemies Left = " + enemiesLeft.ToString();
 
-        if (dialogueManager.dialogueOver == false || gameOverScript.playerDead == true)
+        if (dialogueManager.dialogueOver == false || gameOverScript.playerDead == true || spiderDManager.dialogueOver == false)
         {
             enemyCounterText.gameObject.SetActive(false);
         }

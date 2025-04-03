@@ -32,6 +32,7 @@ public class WavesController : MonoBehaviour
 
     //Dialogue Manager Script
     public DialogueManager dialogueManager;
+    public SpiderDialogueManager spiderDManager;
 
     //Baby Spiders
     [HideInInspector]
@@ -121,7 +122,7 @@ public class WavesController : MonoBehaviour
             
         }
 
-        if (dialogueManager.dialogueOver == false)
+        if (dialogueManager.dialogueOver == false && spiderDManager.dialogueOver == false)
         {
             waveNumText.gameObject.SetActive(false);
 

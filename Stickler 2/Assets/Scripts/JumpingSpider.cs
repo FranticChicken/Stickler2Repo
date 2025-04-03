@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class JumpingSpider : MonoBehaviour
 {
-    [SerializeField] private DialogueManager dialogueBox;
+    [SerializeField] private SpiderDialogueManager dialogueBox;
 
     public void Interact()
-    {       
-            dialogueBox.gameObject.SetActive(true);
+    {
+        dialogueBox.dialogueOver = false;
+        dialogueBox.dialogueStarted = true;
     }
 
    

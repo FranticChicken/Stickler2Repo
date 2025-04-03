@@ -2144,7 +2144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114531924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5002,6 +5002,7 @@ MonoBehaviour:
   gameOverScript: {fileID: 1398901347}
   mouseSenseText: {fileID: 1138943520}
   dialogueManager: {fileID: 1182259766}
+  spiderDManager: {fileID: 721694247}
   crossHair: {fileID: 2078697022}
 --- !u!1 &305871750
 GameObject:
@@ -11979,6 +11980,7 @@ MonoBehaviour:
   dialogueManagerScript: {fileID: 1182259766}
   gameOverScript: {fileID: 1398901347}
   pauseMenuScript: {fileID: 297681249}
+  spiderDManager: {fileID: 721694247}
   isReloading: 0
 --- !u!114 &669467740
 MonoBehaviour:
@@ -11996,6 +11998,7 @@ MonoBehaviour:
   reserveAmmoText: {fileID: 19653661}
   ammoImage: {fileID: 1509775338}
   dialogueManagerScript: {fileID: 1182259766}
+  spiderDManager: {fileID: 721694247}
   gameOverScript: {fileID: 1398901347}
   pauseMenuScript: {fileID: 297681249}
 --- !u!1001 &671970437
@@ -12308,6 +12311,7 @@ MonoBehaviour:
   enemyCounterText: {fileID: 933139318}
   enemiesLeft: 0
   dialogueManager: {fileID: 1182259766}
+  spiderDManager: {fileID: 721694247}
   gameOverScript: {fileID: 1398901347}
 --- !u!1 &690186480
 GameObject:
@@ -12929,13 +12933,14 @@ GameObject:
   m_Component:
   - component: {fileID: 721694246}
   - component: {fileID: 721694245}
+  - component: {fileID: 721694247}
   m_Layer: 5
   m_Name: Jumping spider Dialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &721694245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12943,7 +12948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721694244}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0d31028b3dd943418756922459cd8b4, type: 3}
   m_Name: 
@@ -12958,8 +12963,8 @@ MonoBehaviour:
   - You can pick those up by looking at them and pressing 'E'.
   - Unfortunately, you probably wont be able to carry more than a couple guns.
   - It would be smart to bring one primary and one secondary gun.
-  - Lastly, you won't be able to come back in here once you've left the room, so
-    choose wisely!
+  - You won't be able to come back in here once you've left the room, so choose wisely!
+  - Lastly, press 'E' on the door to start. Good luck!
   textSpeed: 0.05
   dialogueOver: 0
   Click: {fileID: -1386541815972052256, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
@@ -12984,6 +12989,35 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &721694247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721694244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c2b0e2f096294f35a4fcf4a2faf3d2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueText: {fileID: 834604873}
+  dialogueBackground: {fileID: 114531924}
+  sentences:
+  - 'Woah! Careful with those guns! '
+  - I'm not here to hurt you like the rest of those mutated spiders.
+  - I actually came to give you some tips on getting out of here alive.
+  - You see those weapons on the wall next to you?
+  - You can pick those up by looking at them and pressing 'E'.
+  - Unfortunately, you probably wont be able to carry more than a couple guns.
+  - It would be smart to bring one primary and one secondary gun.
+  - You won't be able to come back in here once you've left the room, so choose wisely!
+  - Lastly, press 'E' on the door to start. Good luck!
+  textSpeed: 0.05
+  dialogueOver: 0
+  Click: {fileID: -1386541815972052256, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
+  Tab: {fileID: -3073367361231834352, guid: 09251c1a72c53f24482b278e04362e28, type: 3}
+  dialogueStarted: 0
 --- !u!1001 &722357127
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17056,6 +17090,7 @@ MonoBehaviour:
   pauseMenuScript: {fileID: 297681249}
   gameOverScript: {fileID: 1398901347}
   dialogueManagerScript: {fileID: 1182259766}
+  spiderDManager: {fileID: 721694247}
 --- !u!1 &933139315
 GameObject:
   m_ObjectHideFlags: 0
@@ -21897,9 +21932,10 @@ MonoBehaviour:
   dialogueText: {fileID: 429044254}
   dialogueBackground: {fileID: 2046837184}
   sentences:
-  - Crap! The lab has been overrun by mutated insects!
+  - Crap! The lab has been overrun by mutated spiders!
   - Let's see how long I can survive against them with this gun.
-  - I can press LEFT CLICK to shoot, R to reload, and WASD to move.
+  - I can press or hold LEFT CLICK to shoot, R to reload,
+  - WASD to move, and SHIFT to switch between my primary and secondary guns.
   - If one of these insects touches me, it'll definetely hurt!
   - For now, i should go press 'E' to talk to that small spider on the desk.
   textSpeed: 0.05
@@ -29354,7 +29390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112.280716, y: 19}
+  m_AnchoredPosition: {x: 112.280716, y: 14}
   m_SizeDelta: {x: 150, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1646903851
@@ -29405,8 +29441,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -30590,6 +30626,7 @@ MonoBehaviour:
   waveNumText2: {fileID: 1112151728}
   enemySpawnerScript: {fileID: 393482748}
   dialogueManager: {fileID: 1182259766}
+  spiderDManager: {fileID: 721694247}
   numOfBabySpiders: 0
   allEnemiesKilled: 0
 --- !u!4 &1709622687
@@ -34391,7 +34428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -108.77197, y: 19}
+  m_AnchoredPosition: {x: -108.77197, y: 14}
   m_SizeDelta: {x: 150, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1942018387
@@ -34442,8 +34479,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -40122,6 +40159,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: spiderDManager
+      value: 
+      objectReference: {fileID: 721694247}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 1182259766}
@@ -42849,7 +42891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541583742ae0c8d4c851f79703e6e210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueBox: {fileID: 721694245}
+  dialogueBox: {fileID: 721694247}
 --- !u!95 &5192671946276369308
 Animator:
   serializedVersion: 5
