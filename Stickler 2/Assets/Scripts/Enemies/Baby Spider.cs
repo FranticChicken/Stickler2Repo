@@ -29,6 +29,9 @@ public class BabySpider : MonoBehaviour
     //navmesh stuff
     public float maxDistance = 5f;
 
+    //ANIMATION STUFF
+    Animator babySpiderAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,8 @@ public class BabySpider : MonoBehaviour
         colliding = false;
 
         spiderAudioSource = GetComponent<AudioSource>();
+
+        babySpiderAnimator = GetComponent<Animator>();
     }
 
     private void OnCollisionStay(Collision collision)
@@ -59,6 +64,7 @@ public class BabySpider : MonoBehaviour
 
             spiderAudioSource.clip = attackSFX;
             spiderAudioSource.Play();
+            babySpiderAnimator.SetTrigger("Attack");
         }
     }
 

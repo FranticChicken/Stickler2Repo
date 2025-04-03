@@ -48,6 +48,9 @@ public class EnemyScript : MonoBehaviour
     //navmesh stuff
     public float maxDistance = 5f;
 
+    //animation stuff
+    Animator spiderAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +66,7 @@ public class EnemyScript : MonoBehaviour
         healthPts = maxHealth;
         spiderAudioSource = GetComponent<AudioSource>();
         playerAudioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+        spiderAnimator = GetComponent<Animator>();
 
     }
 
@@ -78,6 +82,8 @@ public class EnemyScript : MonoBehaviour
             lastAttackTime = Time.time;
             spiderAudioSource.clip = attackSFX;
             spiderAudioSource.Play();
+            //attack animation happens here
+            spiderAnimator.SetTrigger("Attack");
         }
     }
 

@@ -50,6 +50,9 @@ public class Enemy2 : MonoBehaviour
     //navmesh stuff
     public float maxDistance = 5f;
 
+    //animation stuff
+    Animator spittingSpiderAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +70,8 @@ public class Enemy2 : MonoBehaviour
         spiderAudioSource = GetComponent<AudioSource>();
 
         colliding = false;
+
+        spittingSpiderAnimator = GetComponent<Animator>();
         
     }
 
@@ -82,6 +87,9 @@ public class Enemy2 : MonoBehaviour
             spiderAudioSource.clip = attackSFX;
             spiderAudioSource.Play();
             lastAttackTime = Time.time;
+
+            //ATTACK ANIMATION PUT HERE BC IDK IF ATTACK ANIMATION IS FOR WHEN THE SPIDER IS COLLIDING OR SPITTING
+            spittingSpiderAnimator.SetTrigger("Attack");
         }
     }
 
@@ -105,7 +113,8 @@ public class Enemy2 : MonoBehaviour
         bulletRig.AddForce(bulletRig.transform.forward * projectileSpeed);
         spiderAudioSource.clip = attack2SFX;
         spiderAudioSource.Play();
-
+        //ATTACK ANIMATION ALSO PUT HERE BC IDK IF ATTACK ANIMATION IS FOR WHEN THE SPIDER IS COLLIDING OR SPITTING
+        spittingSpiderAnimator.SetTrigger("Attack");
     }
 
     private bool IsOnWall()

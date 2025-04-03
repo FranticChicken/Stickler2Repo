@@ -50,6 +50,9 @@ public class Enemy3 : MonoBehaviour
     //navmesh stuff
     public float maxDistance = 5f;
 
+    //animation stuff
+    Animator motherSpiderAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -68,6 +71,8 @@ public class Enemy3 : MonoBehaviour
 
         spiderAudioSource = GetComponent<AudioSource>();
 
+        motherSpiderAnimator = GetComponent<Animator>();
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -82,6 +87,8 @@ public class Enemy3 : MonoBehaviour
             spiderAudioSource.clip = attackSFX;
             spiderAudioSource.Play();
             lastAttackTime = Time.time;
+            //ATTACK ANIMATION TRIGGERED HERE
+            motherSpiderAnimator.SetTrigger("Attack");
         }
     }
 
