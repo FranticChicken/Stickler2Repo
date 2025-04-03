@@ -102,6 +102,8 @@ public class PlayerControls : MonoBehaviour
     public bool makeDeathNoise = false;
     AudioSource audioSource;
     public AudioClip deathSFX;
+    public AudioClip tonysOffice;
+    public AudioClip backgroundNoise;
 
     //gunSelector variables
     [SerializeField] GunSelect gunSelector;
@@ -148,6 +150,9 @@ public class PlayerControls : MonoBehaviour
 
         //audiosource
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = tonysOffice;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -463,6 +468,10 @@ public class PlayerControls : MonoBehaviour
             enemySpawnerScript.gameStarted = true;
             //teleport player to outside hallway
             transform.position = newSpawn.position;
+            audioSource.clip = backgroundNoise;
+            audioSource.loop = true;
+            audioSource.Play();
+
         }
     }
     

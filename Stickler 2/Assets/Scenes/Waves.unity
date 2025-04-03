@@ -40113,6 +40113,11 @@ PrefabInstance:
       objectReference: {fileID: 1918399729}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
+      propertyPath: tonysOffice
+      value: 
+      objectReference: {fileID: 8300000, guid: 20c56890dc64c4d0baed2376ef2a71b5, type: 3}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
       propertyPath: SwapGunInput
       value: 
       objectReference: {fileID: -7103618288580743570, guid: 09251c1a72c53f24482b278e04362e28,
@@ -40172,6 +40177,11 @@ PrefabInstance:
       propertyPath: spiderDManager
       value: 
       objectReference: {fileID: 721694247}
+    - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
+        type: 3}
+      propertyPath: backgroundNoise
+      value: 
+      objectReference: {fileID: 8300000, guid: be1c0014add0445a19dd3075331588f8, type: 3}
     - target: {fileID: 7773262362775292443, guid: 55b2e885f17164d4bb2e06775f776bbd,
         type: 3}
       propertyPath: dialogueManager
