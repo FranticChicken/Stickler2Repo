@@ -201,6 +201,21 @@ public class PlayerControls : MonoBehaviour
             makeDeathNoise = false;
         }
         */
+
+        //replenished health and ammo
+        if (wavesControllerScript.WaveFinished())
+        {
+            currentHealth += healthRestored;
+            if (currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            gun1.RestoreAmmo(ammoRestored);
+            gun2.RestoreAmmo(ammoRestored);
+
+            damageThreshold = currentHealth;
+        }
+
     }
 
     private IEnumerator DeathSound()
@@ -240,20 +255,7 @@ public class PlayerControls : MonoBehaviour
 
         }
 
-        //replenished health and ammo
-        if (wavesControllerScript.WaveFinished())
-        {
-            currentHealth += healthRestored;
-            if (currentHealth > maxHealth)
-            {
-                currentHealth = maxHealth;
-            }
-            gun1.RestoreAmmo(ammoRestored);
-            gun2.RestoreAmmo(ammoRestored);
-
-            damageThreshold = currentHealth;
-        }
-
+        
     }
 
     void OnReload(InputValue reloadValue)
