@@ -13054,6 +13054,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4888507211939691961, guid: 56dfb1dd16e3c894d8644f11b68e7120,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4888507211939691961, guid: 56dfb1dd16e3c894d8644f11b68e7120,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137963918171160531, guid: 56dfb1dd16e3c894d8644f11b68e7120,
         type: 3}
       propertyPath: bulletTrailOrigin
@@ -26652,6 +26662,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1149681373946488336, guid: aad46cd30ce44dd45a2729099b32cb16,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4350685482917032613, guid: aad46cd30ce44dd45a2729099b32cb16,
         type: 3}
       propertyPath: bloom
@@ -33737,7 +33752,7 @@ Transform:
   m_GameObject: {fileID: 1918399724}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.8799973, y: 3.0615, z: -2.393299}
+  m_LocalPosition: {x: -4.8799973, y: 2.42, z: -2.393299}
   m_LocalScale: {x: 0.05, y: 2.1528852, z: 9.284548}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34924,6 +34939,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 518746101}
     m_Modifications:
+    - target: {fileID: 995282784849632040, guid: 75a23478be3205b4a980489df04b5d85,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1124850660882360298, guid: 75a23478be3205b4a980489df04b5d85,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -41378,6 +41398,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 518746101}
     m_Modifications:
+    - target: {fileID: 1882737995482981203, guid: 90267684a9bff3e4eae7dd5b68c60253,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 1882737995482981203, guid: 90267684a9bff3e4eae7dd5b68c60253,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4983033272650718441, guid: 90267684a9bff3e4eae7dd5b68c60253,
         type: 3}
       propertyPath: bulletTrailOrigin
@@ -42445,6 +42475,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 6aaa45bdbc9844b52bafad148c824e91, type: 2}
     - target: {fileID: 5623576151451815438, guid: 4cf89322475c9644fa51958345f1d36a,
         type: 3}
+      propertyPath: m_Volume
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623576151451815438, guid: 4cf89322475c9644fa51958345f1d36a,
+        type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
@@ -43464,6 +43499,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4223449063765656282, guid: e028661d19724014da5af979ff072e9a,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5259679757406650510, guid: e028661d19724014da5af979ff072e9a,
         type: 3}
       propertyPath: m_Name
@@ -43474,6 +43514,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5370131867982184085, guid: e028661d19724014da5af979ff072e9a,
+        type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b7cd4fff48e44bd08260c4857141cac, type: 3}
     - target: {fileID: 5370131867982184085, guid: e028661d19724014da5af979ff072e9a,
         type: 3}
       propertyPath: gunAnimator
@@ -45055,13 +45100,28 @@ PrefabInstance:
     - target: {fileID: 1476682367263008342, guid: ba42cafbcca2ca44e8aeb120582a60e7,
         type: 3}
       propertyPath: m_Volume
-      value: 1
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1476682367263008342, guid: ba42cafbcca2ca44e8aeb120582a60e7,
+        type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1937016156882024096, guid: ba42cafbcca2ca44e8aeb120582a60e7,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: df8abd91ce1c5524fa0a6e258c22d7c7, type: 2}
+    - target: {fileID: 2581364869848321096, guid: ba42cafbcca2ca44e8aeb120582a60e7,
+        type: 3}
+      propertyPath: bloom
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2581364869848321096, guid: ba42cafbcca2ca44e8aeb120582a60e7,
+        type: 3}
+      propertyPath: shootSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: c78573a065bd74767b0c8b8d9b040fd4, type: 3}
     - target: {fileID: 2581364869848321096, guid: ba42cafbcca2ca44e8aeb120582a60e7,
         type: 3}
       propertyPath: bulletTrailOrigin

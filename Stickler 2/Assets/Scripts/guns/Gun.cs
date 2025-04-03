@@ -182,8 +182,8 @@ public class Gun : MonoBehaviour
 
             if (!isReloading)
             {
-                audioSource.Stop();
-                StartCoroutine(Reload());
+                StartCoroutine(AutoReload());
+               
             }            
         }
     } 
@@ -246,6 +246,13 @@ public class Gun : MonoBehaviour
         }
     }
 
+    private IEnumerator AutoReload()
+    {
+        yield return new WaitForSeconds(shotCooldown);
+        audioSource.Stop();
+        StartCoroutine(Reload());
+        yield return null;
+    }
     private IEnumerator Reload()
     {
         gunAnimator.SetTrigger("Reload");
