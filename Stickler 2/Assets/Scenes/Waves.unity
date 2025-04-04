@@ -6702,7 +6702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemy: {fileID: 7498802056641417860, guid: 12756299adfb26940a379ca3604dd860, type: 3}
-  Enemy2: {fileID: 8162044764738412646, guid: b1bbcffecfc580a498e1b81a4c7cf5b7, type: 3}
+  Enemy2: {fileID: 4531900387719985743, guid: d27d67e51a848514dbb49932054c8391, type: 3}
   Enemy3: {fileID: 3276202476399681176, guid: 1a3c8f06edbcf784cbc4a82de1b72702, type: 3}
   spawnPoints:
   - {fileID: 1007481631}
